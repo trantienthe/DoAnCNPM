@@ -4,27 +4,52 @@ import HomePage from "./pages/user/homePage";
 import ProfilePage from "./pages/user/profilePage";
 import { ROUTER } from "./utils/router";
 import MasterLayout from "./pages/user/theme/masterLayout";
+import Cart from "pages/user/cart";
+import Login from "pages/user/login";
+import Register from "pages/user/register";
+import { Fragment } from "react";
 
 const renderUserRouter = () => {
     const userRouters = [
         {
             path: ROUTER.USER.HOME,
-            component: < HomePage />,
+            component: HomePage,
+            layout: MasterLayout
         },
         {
             path: ROUTER.USER.PROFILE,
-            component: < ProfilePage />,
+            component: ProfilePage,
+            layout: MasterLayout
+        },
+        {
+            path: ROUTER.USER.CART,
+            component: Cart,
+            layout: MasterLayout
+        },
+        {
+            path: ROUTER.USER.LOGIN,
+            component: Login,
+            layout: null
+        },
+        {
+            path: ROUTER.USER.REGISTER,
+            component: Register,
+            layout: null
         },
     ];
 
     return (
-        <MasterLayout>
-            <Routes>
-                {userRouters.map((item, key) => (
-                    < Route key={key} path={item.path} element={item.component} />
-                ))}
-            </Routes>
-        </MasterLayout>
+        <Routes>
+            {userRouters.map((item, key) => {
+                const Page = item.component
+                let Layout = Fragment
+                if (item.layout !== null){
+                    Layout = item.layout
+                }
+
+                return < Route key={key} path={item.path} element={<Layout><Page/></Layout>} />
+            })}
+        </Routes>
     );
 };
 

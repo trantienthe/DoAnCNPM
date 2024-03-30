@@ -32,15 +32,15 @@ const Header = () => {
             isShowSubmenu: false,
             child: [
                 {
-                    name: "Thịt",
+                    name: "Thuốc lẻ",
                     path: ROUTER.USER.HOME,
                 },
                 {
-                    name: "Rau củ",
+                    name: "Thuốc hộp",
                     path: ROUTER.USER.HOME,
                 },
                 {
-                    name: "Thức ăn nhanh",
+                    name: "Hỗ trợ",
                     path: ROUTER.USER.HOME,
                 },
             ],
@@ -140,7 +140,7 @@ const Header = () => {
                             </div>
                             <ul>
                                 <li>
-                                    <Link to="">
+                                    <Link to="/cart">
                                         <AiOutlineShoppingCart /> <span>5</span>
                                     </Link>
                                 </li>
@@ -159,19 +159,19 @@ const Header = () => {
                         </div>
                         <ul className={isShowCategories ? "" : "hidden"}>
                             <li>
-                                <Link to={"#"}>Thịt tươi</Link>
+                                <Link to={"#"}>Người lớn</Link>
                             </li>
                             <li>
-                                <Link to={"#"}>Rau củ</Link>
+                                <Link to={"#"}>Trẻ em</Link>
                             </li>
                             <li>
-                                <Link to={"#"}>Nước trái cây</Link>
+                                <Link to={"#"}>Đàn ông</Link>
                             </li>
                             <li>
-                                <Link to={"#"}>Trái cây</Link>
+                                <Link to={"#"}>Phụ nữ</Link>
                             </li>
                             <li>
-                                <Link to={"#"}>Hải sản</Link>
+                                <Link to={"#"}>Tất cả</Link>
                             </li>
                         </ul>
                     </div>
@@ -199,10 +199,10 @@ const Header = () => {
 
                             <div className="hero_item">
                                 <div className="hero_item_text">
-                                    <span>Trái cây tươi</span>
+                                    <span>Mang lại niềm tin cho khách hàng</span>
                                     <h2>
-                                        Rau quả <br />
-                                        sạch 100%
+                                        AN TÂM <br />
+                                        100%
                                     </h2>
                                     <p>Miễn phí giao hàng tận nơi.</p>
                                     <Link to="#" className="primary-btn">

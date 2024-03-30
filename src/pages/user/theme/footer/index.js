@@ -11,12 +11,12 @@ const Footer = () => {
                 <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                     <div className="footer_about">
                         <h1 className="footer_about_logo">
-                            T Shop
+                            An Tâm
                         </h1>
                         <ul>
                             <li>Địa chỉ: Đà Nẵng</li>
-                            <li>SĐT: 0378002209</li>
-                            <li>Email: tranthe2k2ak@gmail.com</li>
+                            <li>SĐT: 037*******</li>
+                            <li>Email: antam@gmail.com</li>
                         </ul>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ const Footer = () => {
                                 <Link to="">Liên hệ</Link>
                             </li>
                             <li>
-                                <Link to="">Thong tin về chúng tôi</Link>
+                                <Link to="">Thông tin về chúng tôi</Link>
                             </li>
                             <li>
                                 <Link to="">Sản phẩm kinh doanh</Link>

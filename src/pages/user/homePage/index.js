@@ -2,16 +2,16 @@ import { memo } from "react";
 import "./style.scss"
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import nhomongtayImg1 from "assets/user/image/categories/slider.jpg";
-import nhomongtayImg2 from "assets/user/image/categories/slider.jpg";
-import nhomongtayImg3 from "assets/user/image/categories/slider.jpg";
-import nhonamphiImg1 from "assets/user/image/categories/slider.jpg";
-import nhonamphiImg2 from "assets/user/image/categories/slider.jpg";
-import featured1 from "assets/user/image/featured/bapcai.jpg";
-import featured2 from "assets/user/image/featured/cachua.jpg";
-import featured3 from "assets/user/image/featured/coca.jpg";
-import featured4 from "assets/user/image/featured/suatuoi.jpg";
-import featured5 from "assets/user/image/featured/thitbo.jpg";
+import nhomongtayImg1 from "assets/user/image/categories/Banner1.webp";
+import nhomongtayImg2 from "assets/user/image/categories/Banner2.webp";
+import nhomongtayImg3 from "assets/user/image/categories/Banner3.webp";
+import nhonamphiImg1 from "assets/user/image/categories/Banner4.webp";
+import nhonamphiImg2 from "assets/user/image/categories/Banner1.webp";
+import featured1 from "assets/user/image/categories/Banner1.webp";
+import featured2 from "assets/user/image/categories/Banner2.webp";
+import featured3 from "assets/user/image/categories/Banner1.webp";
+import featured4 from "assets/user/image/categories/Banner2.webp";
+import featured5 from "assets/user/image/categories/Banner1.webp";
 import { render } from "@testing-library/react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { AiOutlineEye, AiOutlineIdcard, AiOutlineShoppingCart } from "react-icons/ai";
@@ -22,7 +22,6 @@ import { formater } from "utils/fomater";
 const HomePage = () => {
     const responsive = {
         superLargeDesktop: {
-            // the naming can be any, depends on you.
             breakpoint: { max: 4000, min: 3000 },
             items: 5
         },
@@ -73,69 +72,69 @@ const HomePage = () => {
             products: [
                 {
                     img: featured1,
-                    name: "Bap cai 1",
+                    name: "PANADOL",
                     price: 15900,
                 },
                 {
                     img: featured2,
-                    name: "Cà chua 1",
+                    name: "Thuốc nhỏ mắt",
                     price: 7500,
                 },
                 {
                     img: featured3,
-                    name: "Co-ca 1",
+                    name: "Thuốc đau đầu",
                     price: 10500,
                 },
                 {
                     img: featured4,
-                    name: "Sữa",
+                    name: "Thuốc ho",
                     price: 6900,
                 },
                 {
                     img: featured5,
-                    name: "Thịt bò nạt",
+                    name: "Thuốc cảm",
                     price: 32500,
                 },
                 {
                     img: featured1,
-                    name: "Bap cai 2",
+                    name: "Thuốc tiêu chảy",
                     price: 17900,
                 },
                 {
                     img: featured2,
-                    name: "Cà chua 2",
+                    name: "Thuốc tiêu hóa",
                     price: 8500,
                 },
                 {
                     img: featured3,
-                    name: "Co-ca 2",
+                    name: "thuốc xổ",
                     price: 9500,
                 }
             ],
         },
 
         freshMeat: {
-            title: "Thịt tươi",
+            title: "Đau đầu",
             products: [
                 {
                     img: featured5,
-                    name: "Thịt bò nạt tươi",
+                    name: "Thuốc panadol",
                     price: 32500,
                 },
             ],
         },
         fruist: {
-            title: "Trái cây",
+            title: "Nhỏ mắt",
             products: [
                 {
                     img: featured2,
-                    name: "Cà chua",
+                    name: "Thuốc đau đầu",
                     price: 7500,
                 },
             ],
         },
         fastFood: {
-            title: "Đồ ăn nhanh",
+            title: "Hỗ trợ",
             products: [
                 {
                     img: featured4,
@@ -223,6 +222,7 @@ const HomePage = () => {
                     ))}
                 </Carousel>
             </div >
+
             {/*Categories End*/}
 
             {/*Featured Begin*/}

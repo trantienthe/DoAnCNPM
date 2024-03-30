@@ -6,7 +6,6 @@
     margin-top: 30x !important;
 
     .container_slider{
-
         .container_slider_item{
             height: 300px;
             position: relative;
@@ -15,7 +14,6 @@
             background-position: top center;
             margin-top: 20px;
             border-radius: 20px;
-
             
             p {
                 position: absolute;
@@ -37,6 +35,7 @@
             }
         }
 
+       
         .react-multi-carousel-item:not(:first-child):not(:last-child) {
             margin-left: 5px;
             margin-right: 5px;

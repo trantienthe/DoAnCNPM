@@ -170,7 +170,7 @@ const HomePage = () => {
 
                                 <ul className="featured_item_pic_hover">
                                     <li>
-                                        <AiOutlineEye />
+                                       <AiOutlineEye />
                                     </li>
                                     <li>
                                         <AiOutlineShoppingCart />

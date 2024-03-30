@@ -28,7 +28,7 @@ const Register = () => {
 
           <div className='register-link'>
             <p>You already have a login account ?  
-              <a href='#'>
+              <a href='/dang-nhap'>
                 Login
               </a>
             </p>

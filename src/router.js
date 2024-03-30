@@ -8,6 +8,7 @@ import Cart from "pages/user/cart";
 import Login from "pages/user/login";
 import Register from "pages/user/register";
 import { Fragment } from "react";
+import BuyLayout from "pages/user/theme/buyLayout";
 
 const renderUserRouter = () => {
     const userRouters = [
@@ -24,7 +25,7 @@ const renderUserRouter = () => {
         {
             path: ROUTER.USER.CART,
             component: Cart,
-            layout: MasterLayout
+            layout: BuyLayout
         },
         {
             path: ROUTER.USER.LOGIN,

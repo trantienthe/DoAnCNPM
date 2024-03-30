@@ -1,0 +1,63 @@
+@use "sass:map";
+@import "style/pages/theme";
+
+.hero_categories {
+    position: relative;
+
+
+    .hero_categories_all {
+        background: map.get($theme-colors, "main");
+        padding: 15px 25px 15px 40px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 700;
+    
+    
+        svg,
+        span {
+            font-size: 16px;
+            color: white;
+            margin-right: 5px;
+        }
+        svg {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    ul {
+        position: absolute;
+        opacity: 1;
+        border: 1px solid #ebebeb;
+        width: 99%;
+        background: white;
+        transition: all 0.2s;
+
+        li {
+            list-style: none;
+
+            a {
+                text-decoration: none;
+                background-color: transparent;
+                font-size: 16px;
+                color: map.get($theme-colors, "normal_text");
+                line-height: 39px;
+                display: block;
+                padding-left: 40px;
+            }
+
+            &:hover {
+                background: rgb(224, 225, 195);
+
+                a {
+                    color:map.get($theme-colors, "main");
+                }
+            }
+            
+        }
+        &.hidden {
+            opacity: 0;
+        }
+    }
+}

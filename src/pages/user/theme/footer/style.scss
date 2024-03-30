@@ -2,7 +2,7 @@
 @import "style/pages/theme";
 
 .footer {
-    background: #d3d1d1;
+    background: #004AAD;
     padding-top: 70px;
     padding-bottom: 0;
     margin-top: 10px;
@@ -13,10 +13,11 @@
         .footer_about_logo {
             padding: 15px;
             display: inline-block;
+            color: map.get($theme-colors, "color-white");
         }
         ul li {
             font-size: 16px;
-            color: map.get($theme-colors, "normal_text");
+            color: map.get($theme-colors, "color-white");
             line-height: 36px;
             list-style: none;
         }
@@ -26,7 +27,7 @@
         overflow: hidden;
         
         h6 {
-            color: map.get($theme-colors, "normal-text");
+            color: map.get($theme-colors, "color-white");
             margin-bottom: 10px;
             font-size: 16px;
             font-weight: 700;
@@ -40,7 +41,7 @@
                 list-style: none;
     
                 a {
-                    color: map.get($theme-colors, "normal-text");
+                    color: map.get($theme-colors, "color-white");
                     font-size: 14px;
                     line-height: 32px;
                     text-decoration: none;
@@ -51,7 +52,7 @@
 
     p {
         font-size: 14px;
-        color: map.get($theme-colors, "normal-text");
+        color: map.get($theme-colors, "color-white");
         margin-bottom: 30px;
     }
 
@@ -98,7 +99,7 @@
 
             svg {
                 font-size: 20px;
-                padding: 10px;
+                padding: 1px;
                 color: #404040;
                 border: 1px solid #ededed;
                 border-radius: 50px;

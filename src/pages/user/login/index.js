@@ -20,7 +20,7 @@ const Login = () => {
 
           <div className='register-link'>
             <p>Don't have an account ?  
-              <a href='#'>
+              <a href='/dang-ky'>
                 Register
               </a>
             </p>

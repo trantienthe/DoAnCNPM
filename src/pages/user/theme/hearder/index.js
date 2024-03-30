@@ -64,10 +64,10 @@ const Header = () => {
                             <ul>
                                 <li>
                                     <AiOutlineMail />
-                                    tranthe2k2ak@gmail.com
+                                    antam@gmail.com
                                 </li>
                                 <li>
-                                    Miễn phí ship từ đơn {formater(200000)}
+                                    Trung tâm tiêm chủng An Tâm
                                 </li>
                             </ul>
                         </div>
@@ -95,7 +95,9 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <span>Đăng nhập</span>
+                                        <span>
+                                            <a href="/dang-nhap">Đăng nhập</a>
+                                        </span>
                                     </li>
                                 </ul>
                             </div>
@@ -108,7 +110,7 @@ const Header = () => {
                 <div className="row">
                     <div className="col-xl-3">
                         <div className="header_logo">
-                            <h1>T Shop</h1>
+                            <h1>An Tâm</h1>
                         </div>
                     </div>
 
@@ -140,7 +142,7 @@ const Header = () => {
                             </div>
                             <ul>
                                 <li>
-                                    <Link to="/cart">
+                                    <Link to="/gio-hang">
                                         <AiOutlineShoppingCart /> <span>5</span>
                                     </Link>
                                 </li>
@@ -149,71 +151,6 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-
-            <div className="container">
-                <div className="row hero_categories_container">
-                    <div className="col-lg-3 hero_categories">
-                        <div className="hero_categories_all" onClick={() => setShowCategories(!isShowCategories)}>
-                            <AiOutlineMenu />
-                            Danh sách sản phẩm
-                        </div>
-                        <ul className={isShowCategories ? "" : "hidden"}>
-                            <li>
-                                <Link to={"#"}>Người lớn</Link>
-                            </li>
-                            <li>
-                                <Link to={"#"}>Trẻ em</Link>
-                            </li>
-                            <li>
-                                <Link to={"#"}>Đàn ông</Link>
-                            </li>
-                            <li>
-                                <Link to={"#"}>Phụ nữ</Link>
-                            </li>
-                            <li>
-                                <Link to={"#"}>Tất cả</Link>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="col-lg-9 hero_search_container">
-                        <div className="hero_search">
-                            <div className="hero_search_form">
-                                <form>
-                                    <input type="text" value="" placeholder="Bạn đang tìm gì?"></input>
-                                    <button type="submit">Search</button>
-                                </form>
-                            </div>
-
-                            <div className="hero_search_phone">
-                                <form>
-                                    <div className="hero_search_phone_icon">
-                                        <AiOutlinePhone />
-                                    </div>
-                                    <div className="hero_search_phone_text">
-                                        <p>0123456789</p>
-                                        <span>Hỗ trợ 24/7</span>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div className="hero_item">
-                                <div className="hero_item_text">
-                                    <span>Mang lại niềm tin cho khách hàng</span>
-                                    <h2>
-                                        AN TÂM <br />
-                                        100%
-                                    </h2>
-                                    <p>Miễn phí giao hàng tận nơi.</p>
-                                    <Link to="#" className="primary-btn">
-                                        Mua ngay
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div >
         </>
 
 

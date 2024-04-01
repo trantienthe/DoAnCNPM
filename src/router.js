@@ -9,53 +9,69 @@ import Login from "pages/user/login";
 import Register from "pages/user/register";
 import { Fragment } from "react";
 import BuyLayout from "pages/user/theme/buyLayout";
+import ProductDetail from "pages/user/productDetail";
 
 const renderUserRouter = () => {
-    const userRouters = [
-        {
-            path: ROUTER.USER.HOME,
-            component: HomePage,
-            layout: MasterLayout
-        },
-        {
-            path: ROUTER.USER.PROFILE,
-            component: ProfilePage,
-            layout: MasterLayout
-        },
-        {
-            path: ROUTER.USER.CART,
-            component: Cart,
-            layout: BuyLayout
-        },
-        {
-            path: ROUTER.USER.LOGIN,
-            component: Login,
-            layout: null
-        },
-        {
-            path: ROUTER.USER.REGISTER,
-            component: Register,
-            layout: null
-        },
-    ];
+  const userRouters = [
+    {
+      path: ROUTER.USER.HOME,
+      component: HomePage,
+      layout: MasterLayout,
+    },
+    {
+      path: ROUTER.USER.PROFILE,
+      component: ProfilePage,
+      layout: MasterLayout,
+    },
+    {
+      path: ROUTER.USER.CART,
+      component: Cart,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.LOGIN,
+      component: Login,
+      layout: null,
+    },
+    {
+      path: ROUTER.USER.REGISTER,
+      component: Register,
+      layout: null,
+    },
+    {
+      path: ROUTER.USER.PRODUCTDETAIL,
+      component: ProductDetail,
+      layout: BuyLayout,
+    },
+  ];
 
-    return (
-        <Routes>
-            {userRouters.map((item, key) => {
-                const Page = item.component
-                let Layout = Fragment
-                if (item.layout !== null){
-                    Layout = item.layout
-                }
+  return (
+    <Routes>
+      {userRouters.map((item, key) => {
+        const Page = item.component;
+        let Layout = Fragment;
+        if (item.layout !== null) {
+          Layout = item.layout;
+        }
 
-                return < Route key={key} path={item.path} element={<Layout><Page/></Layout>} />
-            })}
-        </Routes>
-    );
+        return (
+          <Route
+            key={key}
+            path={item.path}
+            element={
+              <Layout>
+                <Page />
+              </Layout>
+            }
+          />
+        );
+      })}
+    </Routes>
+  );
 };
 
 const RouterCustom = () => {
-    return renderUserRouter();
+  return renderUserRouter();
 };
 
 export default RouterCustom;

@@ -13,6 +13,7 @@ import {
 import { Link } from "react-router-dom";
 import { formater } from "utils/fomater";
 import { ROUTER } from "utils/router";
+import logo from "assets/user/image/background/logorm.png";
 
 const Header = () => {
   const [isShowCategories, setShowCategories] = useState(true);
@@ -56,7 +57,7 @@ const Header = () => {
   ]);
 
   return (
-    <>
+    <div className="containerHeader">
       <div className="header_top">
         <div className="container">
           <div className="row">
@@ -113,7 +114,10 @@ const Header = () => {
         <div className="row">
           <div className="col-xl-3">
             <div className="header_logo">
-              <h1>An Tâm</h1>
+              <img src={logo} alt="logo" />
+              <h1>
+                <Link to="/">AN TÂM</Link>
+              </h1>
             </div>
           </div>
 
@@ -154,7 +158,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

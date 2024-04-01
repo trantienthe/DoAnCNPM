@@ -1,14 +1,20 @@
 @use "sass:map";
 @import "style/pages/theme";
 
+.containerHeader {
+  background-image: url("../../../../assets/user/image/background/bgheader.jpg");
+  margin-bottom: 20px;
+}
+
 .header_top {
-  background: #004aad;
 }
 
 .header_top_left {
   ul {
     display: flex;
     align-items: center;
+    font-weight: bold;
+    font-size: 14px;
     padding: 10px 0 13px;
     list-style: none;
     column-gap: 20px;
@@ -43,6 +49,7 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px 0 13px;
+  font-weight: bold;
 
   ul {
     display: flex;
@@ -70,7 +77,23 @@
 }
 
 .header_logo {
-  padding: 15px 0;
+  padding-right: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 70px;
+    height: 70px;
+  }
+  h1 {
+    a {
+      font-weight: bold;
+      font-family: "Times New Roman", Times, serif;
+      text-decoration: none;
+      font-size: 26px;
+    }
+  }
 }
 
 .header_menu {
@@ -87,7 +110,7 @@
       a {
         text-decoration: none;
         font-size: 16px;
-        color: map.get($theme-colors, "bold-text");
+        color: white;
         text-transform: uppercase;
         font-weight: bold;
         letter-spacing: 2px;
@@ -103,11 +126,12 @@
     }
 
     .active a {
-      color: map.get($theme-colors, "main");
+      color: black;
     }
 
     .header_menu_child {
-      background: #000000;
+      border-radius: 10px;
+      background: #712e98;
       display: block;
       position: absolute;
       width: 180px;
@@ -126,7 +150,7 @@
         }
 
         :hover {
-          color: map.get($theme-colors, "main");
+          color: red;
         }
       }
     }

@@ -1,0 +1,27 @@
+@use "sass:map";
+
+.container {
+  .container_profile_page {
+    padding: 0 50px 50px 50px;
+    border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    height: auto;
+    border: 5px solid #cc6161;
+    h1 {
+      padding-top: 50px;
+      color: red;
+      text-align: center;
+    }
+
+    h2 {
+      padding-top: 20px;
+      color: black;
+    }
+
+    h3 {
+      font-weight: 500;
+      padding-top: 20px;
+      padding-left: 20px;
+    }
+  }
+}

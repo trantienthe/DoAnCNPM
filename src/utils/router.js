@@ -1,7 +1,7 @@
 export const ROUTER = {
   USER: {
     HOME: "",
-    PROFILE: "thong-tin-ca-nhan",
+    PROFILE: "/gioi-thieu",
     PRODUCTS: "/san-pham",
     CART: "/gio-hang",
     LOGIN: "/dang-nhap",

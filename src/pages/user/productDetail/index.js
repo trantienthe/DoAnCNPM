@@ -20,6 +20,19 @@ const ProductDetail = () => {
   return (
     <>
       <div className="container">
+        {/* <div className="container-breadcrumb">
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                Chi tiết sản phẩm
+              </li>
+            </ol>
+          </nav>
+        </div> */}
+
         <div className="product-detail-container">
           <div className="product-detail-left">
             <div className="product-image">
@@ -50,6 +63,40 @@ const ProductDetail = () => {
             </p>
 
             <button className="add-to-cart-button">Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+
+        <div className="container-information-more">
+          <h2>THÔNG TIN LIÊN QUAN</h2>
+          <div className="table-container">
+            <div className="table-column">
+              <div className="table-header">Danh Mục :</div>
+              <div className="table-content">Dầu cá, Omega 3, DHA</div>
+            </div>
+            <div className="table-column">
+              <div className="table-header">Thành phần :</div>
+              <div className="table-content">Thuốc</div>
+            </div>
+            <div className="table-column">
+              <div className="table-header">Phản ứng phụ :</div>
+              <div className="table-content">Kích ứng da</div>
+            </div>
+            <div className="table-column">
+              <div className="table-header">Hạn sử dụng :</div>
+              <div className="table-content">01/01/2026</div>
+            </div>
+            <div className="table-column">
+              <div className="table-header">Đối tượng sử dụng :</div>
+              <div className="table-content">Phụ nữ</div>
+            </div>
+            <div className="table-column">
+              <div className="table-header">Cách đóng gói :</div>
+              <div className="table-content">dạng tuýp</div>
+            </div>
+            <div className="table-column">
+              <div className="table-header">Nơi sản xuất :</div>
+              <div className="table-content">Việt Nam</div>
+            </div>
           </div>
         </div>
 

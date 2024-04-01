@@ -1,25 +1,50 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import './style.scss';
+import slide1 from "assets/user/image/categories/Banner1.webp";
+import slide2 from "assets/user/image/categories/Banner2.webp";
+import slide3 from "assets/user/image/categories/Banner3.webp";
+import { Slide } from "react-slideshow-image";
+import "react-slideshow-image/dist/styles.css";
+import "./style.scss";
 
-const Slider = () => {
+const spanStyle = {
+  padding: "20px",
+  color: "#000000",
+  opacity: "0.5",
+};
+
+const divStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundSize: "cover",
+  height: "400px",
+  width: "850px",
+};
+const slideImages = [
+  {
+    url: slide1,
+  },
+  {
+    url: slide2,
+  },
+  {
+    url: slide3,
+  },
+];
+
+const Slideshow = () => {
   return (
-    <>
-        <div className="hero_item">
-            <div className="hero_item_text">
-                <span>Mang lại niềm tin cho khách hàng</span>
-                <h2>
-                    AN TÂM <br />
-                    100%
-                </h2>
-                <p>Miễn phí giao hàng tận nơi.</p>
-                <Link to="#" className="primary-btn">
-                    Mua ngay
-                </Link>
-            </div>
-        </div>
-    </>
-  )
-}
+    <div className="slide-container">
+      <Slide>
+        {slideImages.map((slideImage, index) => (
+          <div key={index}>
+            <div
+              style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}
+            ></div>
+          </div>
+        ))}
+      </Slide>
+    </div>
+  );
+};
 
-export default Slider;
+export default Slideshow;

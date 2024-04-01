@@ -4,6 +4,7 @@ import "./style.scss";
 import React from "react";
 import { AiOutlineMenu, AiOutlinePhone } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
 
 const CategoryLayout = () => {
   const [isShowCategories, setShowCategories] = useState(true);
@@ -42,13 +43,11 @@ const CategoryLayout = () => {
           <div className="col-lg-9 hero_search_container">
             <div className="hero_search">
               <div className="hero_search_form">
-                <form>
-                  <input
-                    type="text"
-                    value=""
-                    placeholder="Bạn đang tìm gì?"
-                  ></input>
-                  <button type="submit">Search</button>
+                <form className="searchForm">
+                  <input type="text" placeholder="Bạn đang tìm gì?"></input>
+                  <button type="submit">
+                    <CiSearch className="iconSearch" />
+                  </button>
                 </form>
               </div>
 

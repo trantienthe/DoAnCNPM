@@ -2,16 +2,20 @@ import { memo } from "react";
 import "./style.scss";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import nhomongtayImg1 from "assets/user/image/categories/Banner1.webp";
-import nhomongtayImg2 from "assets/user/image/categories/Banner2.webp";
-import nhomongtayImg3 from "assets/user/image/categories/Banner3.webp";
-import nhonamphiImg1 from "assets/user/image/categories/Banner4.webp";
-import nhonamphiImg2 from "assets/user/image/categories/Banner1.webp";
-import featured1 from "assets/user/image/categories/Banner1.webp";
-import featured2 from "assets/user/image/categories/Banner2.webp";
-import featured3 from "assets/user/image/categories/Banner1.webp";
-import featured4 from "assets/user/image/categories/Banner2.webp";
-import featured5 from "assets/user/image/categories/Banner1.webp";
+import slide1 from "assets/user/image/product/thuoc4.jpg";
+import slide2 from "assets/user/image/product/thuoc5.jpg";
+import slide3 from "assets/user/image/product/thuoc6.jpg";
+import slide4 from "assets/user/image/product/thuoc1.jpg";
+import slide5 from "assets/user/image/product/thuoc2.jpg";
+import slide6 from "assets/user/image/product/thuoc3.jpg";
+import featured1 from "assets/user/image/product/thuoc1.jpg";
+import featured2 from "assets/user/image/product/thuoc2.jpg";
+import featured3 from "assets/user/image/product/thuoc3.jpg";
+import featured4 from "assets/user/image/product/thuoc4.jpg";
+import featured5 from "assets/user/image/product/thuoc5.jpg";
+import banner1 from "assets/user/image/categories/Banner1.webp";
+import banner2 from "assets/user/image/categories/Banner2.webp";
+
 import { render } from "@testing-library/react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import {
@@ -44,27 +48,27 @@ const HomePage = () => {
 
   const sliderItems = [
     {
-      bgImg: nhomongtayImg1,
+      bgImg: slide1,
       name: "Sản phẩm 1",
     },
     {
-      bgImg: nhonamphiImg1,
+      bgImg: slide2,
       name: "Sản phẩm 2",
     },
     {
-      bgImg: nhomongtayImg2,
+      bgImg: slide3,
       name: "Sản phẩm 3",
     },
     {
-      bgImg: nhonamphiImg2,
+      bgImg: slide4,
       name: "Sản phẩm 4",
     },
     {
-      bgImg: nhomongtayImg3,
+      bgImg: slide5,
       name: "Sản phẩm 5",
     },
     {
-      bgImg: nhomongtayImg3,
+      bgImg: slide6,
       name: "Sản phẩm 6",
     },
   ];
@@ -75,43 +79,43 @@ const HomePage = () => {
       products: [
         {
           img: featured1,
-          name: "PANADOL",
-          price: 15900,
+          name: "Viên uống Perfect White Jpanwell hỗ trợ làm đẹp da",
+          price: 1790000,
         },
         {
           img: featured2,
-          name: "Thuốc nhỏ mắt",
-          price: 7500,
+          name: "Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp",
+          price: 960000,
         },
         {
           img: featured3,
-          name: "Thuốc đau đầu",
-          price: 10500,
+          name: "Tổ yến tinh chế sợi dài Kami Nest bổ dưỡng cho hệ tim mạch, tăng cường hệ thống miễn dịch ",
+          price: 1942500,
         },
         {
           img: featured4,
-          name: "Thuốc ho",
-          price: 6900,
+          name: "Viên nén Orihiro Glucosamine 900 hỗ trợ làm trơn ổ khớp, hạn chế lão hóa khớp",
+          price: 299520,
         },
         {
           img: featured5,
-          name: "Thuốc cảm",
-          price: 32500,
+          name: "Viên nén Orihiro Glucosamine 900 hỗ trợ làm trơn ổ khớp, hạn chế lão hóa khớp",
+          price: 464400,
         },
         {
           img: featured1,
-          name: "Thuốc tiêu chảy",
-          price: 17900,
+          name: "Viên uống Perfect White Jpanwell hỗ trợ làm đẹp da",
+          price: 1790000,
         },
         {
           img: featured2,
-          name: "Thuốc tiêu hóa",
-          price: 8500,
+          name: "Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp",
+          price: 960000,
         },
         {
           img: featured3,
-          name: "thuốc xổ",
-          price: 9500,
+          name: "Tổ yến tinh chế sợi dài Kami Nest bổ dưỡng cho hệ tim mạch, tăng cường hệ thống miễn dịch",
+          price: 1942500,
         },
       ],
     },
@@ -169,6 +173,9 @@ const HomePage = () => {
                 className="featured_item_pic"
                 style={{
                   background: `url(${item.img})`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  backgroundSize: "contain",
                 }}
               >
                 <ul className="featured_item_pic_hover">
@@ -217,9 +224,7 @@ const HomePage = () => {
             <div
               className="container_slider_item"
               style={{ backgroundImage: `url(${item.bgImg})` }}
-            >
-              <p>{item.name}</p>
-            </div>
+            ></div>
           ))}
         </Carousel>
       </div>
@@ -241,10 +246,10 @@ const HomePage = () => {
       <div className="container">
         <div className="banner">
           <div className="banner_pic">
-            <img src={nhomongtayImg1} alt="banner1" />
+            <img src={banner1} alt="banner1" />
           </div>
           <div className="banner_pic">
-            <img src={nhomongtayImg1} alt="banner2" />
+            <img src={banner2} alt="banner2" />
           </div>
         </div>
       </div>

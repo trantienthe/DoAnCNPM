@@ -1,7 +1,8 @@
 import { memo } from "react";
 import "./style.scss";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+
+import Carousel from "react-multi-carousel";
 import slide1 from "assets/user/image/product/thuoc4.jpg";
 import slide2 from "assets/user/image/product/thuoc5.jpg";
 import slide3 from "assets/user/image/product/thuoc6.jpg";

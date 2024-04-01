@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import anhsanpham from "assets/user/image/product/thuoc1.jpg";
 import { Link } from "react-router-dom";
+import { Slide } from "react-slideshow-image";
+import Slideshow from "../theme/slider";
 
 const ProductDetail = () => {
   const [showMore, setShowMore] = useState(false);

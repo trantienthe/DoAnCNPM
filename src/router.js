@@ -21,7 +21,7 @@ const renderUserRouter = () => {
     {
       path: ROUTER.USER.PROFILE,
       component: ProfilePage,
-      layout: MasterLayout,
+      layout: BuyLayout,
     },
     {
       path: ROUTER.USER.CART,

@@ -17,42 +17,43 @@ import logo from "assets/user/image/background/logorm.png";
 
 const Header = () => {
   const [isShowCategories, setShowCategories] = useState(true);
+  const [activeMenu, setActiveMenu] = useState(0);
 
   const [menus] = useState([
     {
       name: "Trang chủ",
-      path: ROUTER.USER.HOME,
+      path: "/",
     },
     {
-      name: "Cửa hàng",
-      path: ROUTER.USER.PRODUCTS,
+      name: "Giới thiệu",
+      path: ROUTER.USER.PROFILE,
     },
     {
       name: "Sản phẩm",
-      path: "",
+      path: "/gioi-thieu",
       isShowSubmenu: false,
       child: [
         {
           name: "Thuốc lẻ",
-          path: ROUTER.USER.HOME,
+          path: "/",
         },
         {
           name: "Thuốc hộp",
-          path: ROUTER.USER.HOME,
+          path: "/",
         },
         {
           name: "Hỗ trợ",
-          path: ROUTER.USER.HOME,
+          path: "/gioi-thieu",
         },
       ],
     },
     {
       name: "Bài viết",
-      path: "ROUTER.USER.PRODUCTS",
+      path: "/",
     },
     {
       name: "Liên hệ",
-      path: "ROUTER.USER.PRODUCTS",
+      path: "/",
     },
   ]);
 
@@ -125,12 +126,16 @@ const Header = () => {
             <nav className="header_menu">
               <ul>
                 {menus?.map((menu, menuKey) => (
-                  <li key={menuKey} className={menuKey === 0 ? "active" : ""}>
+                  <li
+                    key={menuKey}
+                    className={menuKey === activeMenu ? "active" : ""}
+                    onClick={() => setActiveMenu(menuKey)}
+                  >
                     <Link to={menu?.path}> {menu?.name} </Link>
                     {menu.child && (
                       <ul className="header_menu_child">
                         {menu.child.map((childItem, childItemKey) => (
-                          <li key={"${menuKey}" - "${childItemKey}"}>
+                          <li key={`${menuKey}-${childItemKey}`}>
                             <Link to={childItem.path}>{childItem.name}</Link>
                           </li>
                         ))}

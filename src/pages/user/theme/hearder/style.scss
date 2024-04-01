@@ -120,13 +120,8 @@
       }
     }
 
-    li:hover .header_menu_child {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .active a {
-      color: black;
+    li.active a {
+      color: rgb(9, 9, 9);
     }
 
     .header_menu_child {

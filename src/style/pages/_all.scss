@@ -4,138 +4,133 @@
 
 html,
 body {
-    margin: 0;
+  margin: 0;
 }
 
 * {
-    font-family: Roboto;
-    padding: 0;
-    margin: 0;
+  font-family: Roboto;
+  padding: 0;
+  margin: 0;
 }
 
-.container{
-    max-width: 1170px;
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-    //background: map.get($theme-colors, "main");
-    margin: auto;
+.container {
+  max-width: 1170px;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+  //background: map.get($theme-colors, "main");
+  margin: auto;
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-
+  display: flex;
+  flex-wrap: wrap;
 }
 .col-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 .col-lg-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
+  flex: 0 0 25%;
+  max-width: 25%;
 }
 
 .col-lg-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 .col-lg-9 {
-    flex: 0 0 75%;
-    max-width: 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
 }
-
 
 .button-submit {
-    font-size: 14px;
-    color: #ffffff;
-    font-weight: 800;
-    text-transform: uppercase;
-    display: inline-block;
-    padding: 16px 30px 17px;
-    background: map.get($theme-colors, "main");
-    border: none;
-    height: 100%;
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 16px 30px 17px;
+  background: map.get($theme-colors, "main");
+  border: none;
+  height: 100%;
 }
 
+@include Responsive($DESKTOP) {
+  .col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
 
-
-@include Responsive($DESKTOP){
-    .col-xl-3 {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
-
-    .col-xl-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+  .col-xl-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
 
-@include Responsive($MEDIUM_DEVICE){
-    .col-lg-3 {
-        flex: 0 0 25%;
-        max-width: 25%;
-    }
+@include Responsive($MEDIUM_DEVICE) {
+  .col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
 }
 
-@include Responsive($TABLET_DEVICE){
-    .col-md-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+@include Responsive($TABLET_DEVICE) {
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 
-    .col-md-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+  .col-md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
-@include Responsive($WIDE_MOBILE){
-    .col-sm-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-    }
+@include Responsive($WIDE_MOBILE) {
+  .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 
-    .col-sm-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+  .col-sm-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
-@include Responsive($SMALL_DEVICE){
-    .col-xs-12 {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+@include Responsive($SMALL_DEVICE) {
+  .col-xs-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }
 
 .containers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: url("/assets/user/image/background/bglogin.jpg")
-    no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("/assets/user/image/background/bglogin.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 
-    button{
-        width: 100%;
-        height: 45px;
-        background-color: #fff;
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-        cursor: pointer;
-        font-size: 16px;
-        color: #333;
-        font-weight: 700;
-    }
-    button:hover{
-        background-color: rgb(244, 135, 108);
-        color: white;
-    }
+  button {
+    width: 100%;
+    height: 45px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+  }
+  button:hover {
+    background-color: rgb(244, 135, 108);
+    color: white;
+  }
 }

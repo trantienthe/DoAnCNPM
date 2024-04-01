@@ -2,8 +2,32 @@
 @import "style/pages/all";
 
 .container {
+  .container-breadcrumb {
+    .breadcrumb {
+      padding: 8px 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      font-size: 18px;
+
+      &-item {
+        display: inline-block;
+        margin-right: 5px;
+
+        &:last-child {
+          font-weight: bold;
+          color: #000;
+        }
+
+        &:not(:last-child)::after {
+          content: "›";
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+
   .product-detail-container {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 100px;
     display: flex;
     border-radius: 50px;
@@ -72,19 +96,64 @@
 
       .add-to-cart-button {
         height: 50px;
-        width: 250px;
+        width: 200px;
         text-align: center;
         border-radius: 20px;
-        background-color: rgb(100, 75, 222);
+        background-color: rgb(185, 180, 212);
         font-size: 18px;
         font-weight: bold;
+        color: black;
+      }
+
+      .add-to-cart-button:hover {
         color: white;
+        background-color: red;
       }
     }
   }
 }
+.container-information-more {
+  padding: 40px;
+  border: 5px solid #e4cccc;
+  border-top-left-radius: 70px;
+  border-bottom-right-radius: 70px;
+
+  h2 {
+    text-align: center;
+    color: #6079cc;
+    font-size: 26px;
+  }
+  .table-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-column {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc; /* Kẻ đường ngang cho mỗi hàng */
+  }
+
+  .table-header {
+    font-size: 17px;
+  }
+  .table-content {
+    padding: 5px;
+  }
+
+  .table-header {
+    font-weight: bold;
+    border-right: 1px solid #ccc;
+  }
+
+  .table-content {
+    border-right: 1px solid #ccc;
+  }
+}
 
 .container-mota {
+  padding-top: 50px;
   padding-bottom: 50px;
   .container-text-mota {
     height: auto;
@@ -112,7 +181,7 @@
         height: auto;
       }
       &.hidden {
-        height: 200px;
+        height: 150px;
       }
     }
 

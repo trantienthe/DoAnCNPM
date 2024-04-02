@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { formater } from "utils/fomater";
 import { ROUTER } from "utils/router";
 import logo from "assets/user/image/background/logorm.png";
+import ToastNotify from "pages/component/ToastNotify";
 
 const Header = () => {
   const [isShowCategories, setShowCategories] = useState(true);
@@ -59,6 +60,7 @@ const Header = () => {
 
   return (
     <div className="containerHeader">
+      <ToastNotify />
       <div className="header_top">
         <div className="container">
           <div className="row">

@@ -1,10 +1,24 @@
 import React from "react";
-import "./style.scss";
 import { CiUser, CiLock } from "react-icons/ci";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import ToastNotify from "pages/component/ToastNotify";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    navigate("/", {
+      state: {
+        notify: {
+          type: "success",
+          message: "Xin chào, Thế",
+        },
+      },
+    });
+  };
   return (
     <div className="containers">
+      <ToastNotify />
       <div className="wrapper">
         <form action="">
           <h1>Login</h1>
@@ -16,7 +30,9 @@ const Login = () => {
             <input type="password" placeholder="Password" required />
             <CiLock className="icon" />
           </div>
-          <button type="submit">Login</button>
+          <button type="button" onClick={handleLogin}>
+            Login
+          </button>
 
           <div className="register-link">
             <p>

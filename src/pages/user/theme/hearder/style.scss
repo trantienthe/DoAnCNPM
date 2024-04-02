@@ -118,20 +118,24 @@
         padding: 5px 0;
         display: block;
       }
-    }
 
-    li.active a {
-      color: rgb(9, 9, 9);
+      &:hover .header_menu_child {
+        opacity: 1;
+        visibility: visible;
+      }
     }
 
     .header_menu_child {
-      border-radius: 10px;
-      background: #712e98;
+      right: -8px;
+      text-align: center;
+      border-top-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+      background: rgb(173, 176, 238);
       display: block;
       position: absolute;
-      width: 180px;
+      width: 120px;
       z-index: 9;
-      pad: 5px 0;
+      padding: 5px 0;
       transition: all 0.3s;
       opacity: 0;
       visibility: hidden;
@@ -140,12 +144,12 @@
         a {
           text-transform: capitalize;
           color: white;
-          font-weight: 400;
+          font-weight: 300;
           padding: 5px 10px;
         }
 
         :hover {
-          color: red;
+          color: rgb(21, 21, 21);
         }
       }
     }

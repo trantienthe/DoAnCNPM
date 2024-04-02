@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import "./style.scss";
 import "react-multi-carousel/lib/styles.css";
 
@@ -26,8 +26,41 @@ import {
 } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { formater } from "utils/fomater";
+import axios from "axios";
 
 const HomePage = () => {
+  const [medicines, setMedicines] = useState([]);
+
+  useEffect(() => {
+    const fetchMedicines = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        console.log(response);
+
+        const groupedMedicines = response.data.reduce((acc, medicine) => {
+          const category = medicine.category.id;
+          if (!acc[category]) {
+            acc[category] = {
+              title: medicine.category.name,
+              products: [],
+            };
+          }
+          acc[category].products.push({
+            img: `http://127.0.0.1:8000/static/${medicine.image}`,
+            name: medicine.name,
+            price: medicine.price,
+          });
+          return acc;
+        }, {});
+
+        setMedicines(groupedMedicines);
+      } catch (error) {
+        console.error("Lỗi khi tải danh sách thuốc:", error);
+      }
+    };
+    fetchMedicines();
+  }, []);
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -74,89 +107,89 @@ const HomePage = () => {
     },
   ];
 
-  const featProducts = {
-    all: {
-      title: "Toàn bộ",
-      products: [
-        {
-          img: featured1,
-          name: "Viên uống Perfect White Jpanwell hỗ trợ làm đẹp da",
-          price: 1790000,
-        },
-        {
-          img: featured2,
-          name: "Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp",
-          price: 960000,
-        },
-        {
-          img: featured3,
-          name: "Tổ yến tinh chế sợi dài Kami Nest bổ dưỡng cho hệ tim mạch, tăng cường hệ thống miễn dịch ",
-          price: 1942500,
-        },
-        {
-          img: featured4,
-          name: "Viên nén Orihiro Glucosamine 900 hỗ trợ làm trơn ổ khớp, hạn chế lão hóa khớp",
-          price: 299520,
-        },
-        {
-          img: featured5,
-          name: "Viên nén Orihiro Glucosamine 900 hỗ trợ làm trơn ổ khớp, hạn chế lão hóa khớp",
-          price: 464400,
-        },
-        {
-          img: featured1,
-          name: "Viên uống Perfect White Jpanwell hỗ trợ làm đẹp da",
-          price: 1790000,
-        },
-        {
-          img: featured2,
-          name: "Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp",
-          price: 960000,
-        },
-        {
-          img: featured3,
-          name: "Tổ yến tinh chế sợi dài Kami Nest bổ dưỡng cho hệ tim mạch, tăng cường hệ thống miễn dịch",
-          price: 1942500,
-        },
-      ],
-    },
+  // const featProducts = {
+  //   all: {
+  //     title: "Toàn bộ",
+  //     products: [
+  //       {
+  //         img: featured1,
+  //         name: "Viên uống Perfect White Jpanwell hỗ trợ làm đẹp da",
+  //         price: 1790000,
+  //       },
+  //       {
+  //         img: featured2,
+  //         name: "Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp",
+  //         price: 960000,
+  //       },
+  //       {
+  //         img: featured3,
+  //         name: "Tổ yến tinh chế sợi dài Kami Nest bổ dưỡng cho hệ tim mạch, tăng cường hệ thống miễn dịch ",
+  //         price: 1942500,
+  //       },
+  //       {
+  //         img: featured4,
+  //         name: "Viên nén Orihiro Glucosamine 900 hỗ trợ làm trơn ổ khớp, hạn chế lão hóa khớp",
+  //         price: 299520,
+  //       },
+  //       {
+  //         img: featured5,
+  //         name: "Viên nén Orihiro Glucosamine 900 hỗ trợ làm trơn ổ khớp, hạn chế lão hóa khớp",
+  //         price: 464400,
+  //       },
+  //       {
+  //         img: featured1,
+  //         name: "Viên uống Perfect White Jpanwell hỗ trợ làm đẹp da",
+  //         price: 1790000,
+  //       },
+  //       {
+  //         img: featured2,
+  //         name: "Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp",
+  //         price: 960000,
+  //       },
+  //       {
+  //         img: featured3,
+  //         name: "Tổ yến tinh chế sợi dài Kami Nest bổ dưỡng cho hệ tim mạch, tăng cường hệ thống miễn dịch",
+  //         price: 1942500,
+  //       },
+  //     ],
+  //   },
 
-    freshMeat: {
-      title: "Đau đầu",
-      products: [
-        {
-          img: featured5,
-          name: "Thuốc panadol",
-          price: 32500,
-        },
-      ],
-    },
-    fruist: {
-      title: "Nhỏ mắt",
-      products: [
-        {
-          img: featured2,
-          name: "Thuốc đau đầu",
-          price: 7500,
-        },
-      ],
-    },
-    fastFood: {
-      title: "Hỗ trợ",
-      products: [
-        {
-          img: featured4,
-          name: "Sửa vinamik",
-          price: 6900,
-        },
-        {
-          img: featured4,
-          name: "Sửa vinamik",
-          price: 5900,
-        },
-      ],
-    },
-  };
+  //   freshMeat: {
+  //     title: "Đau đầu",
+  //     products: [
+  //       {
+  //         img: featured5,
+  //         name: "Thuốc panadol",
+  //         price: 32500,
+  //       },
+  //     ],
+  //   },
+  //   fruist: {
+  //     title: "Nhỏ mắt",
+  //     products: [
+  //       {
+  //         img: featured2,
+  //         name: "Thuốc đau đầu",
+  //         price: 7500,
+  //       },
+  //     ],
+  //   },
+  //   fastFood: {
+  //     title: "Hỗ trợ",
+  //     products: [
+  //       {
+  //         img: featured4,
+  //         name: "Sửa vinamik",
+  //         price: 6900,
+  //       },
+  //       {
+  //         img: featured4,
+  //         name: "Sửa vinamik",
+  //         price: 5900,
+  //       },
+  //     ],
+  //   },
+  // };
 
   const renderFeaturedProducts = (data) => {
     const tabList = [];
@@ -238,7 +271,7 @@ const HomePage = () => {
           <div className="section-title">
             <h2>Sản phẩm nổi bật</h2>
           </div>
-          {renderFeaturedProducts(featProducts)}
+          {renderFeaturedProducts(medicines)}
         </div>
       </div>
       {/*Featured End*/}

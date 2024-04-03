@@ -11,7 +11,7 @@ const Register = () => {
       state: {
         notify: {
           type: "success",
-          message: "Xin chào, Thế",
+          message: "Đăng ký thành công",
         },
       },
     });

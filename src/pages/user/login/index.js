@@ -11,7 +11,7 @@ const Login = () => {
       state: {
         notify: {
           type: "success",
-          message: "Xin chào, Thế",
+          message: "Xin chào bạn",
         },
       },
     });

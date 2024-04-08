@@ -47,7 +47,8 @@ const HomePage = () => {
           }
           acc[category].products.push({
             img: `http://127.0.0.1:8000/static/${medicine.image}`,
-            name: medicine.name,
+            id: medicine.id_medicine,
+            name: medicine.name_medicine,
             price: medicine.price,
           });
           return acc;
@@ -214,7 +215,7 @@ const HomePage = () => {
               >
                 <ul className="featured_item_pic_hover">
                   <li>
-                    <Link to={"/chi-tiet-san-pham"}>
+                    <Link to={`/chi-tiet-san-pham/${item.id}`}>
                       <AiOutlineEye />
                     </Link>
                   </li>

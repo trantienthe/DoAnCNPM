@@ -6,6 +6,6 @@ export const ROUTER = {
     CART: "/gio-hang",
     LOGIN: "/dang-nhap",
     REGISTER: "/dang-ky",
-    PRODUCTDETAIL: "/chi-tiet-san-pham",
+    PRODUCTDETAIL: "/chi-tiet-san-pham/:id",
   },
 };

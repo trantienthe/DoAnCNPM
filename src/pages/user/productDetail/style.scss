@@ -57,7 +57,7 @@
       border: 5px solid rgb(135, 10, 10);
       border-top-left-radius: 80px;
       border-bottom-right-radius: 80px;
-      padding: 40px 20px 20px 50px;
+      padding: 40px 50px 20px 50px;
 
       .product-title {
         padding-top: 20px;
@@ -92,6 +92,7 @@
       .product-description {
         padding-top: 20px;
         padding-bottom: 20px;
+        overflow-wrap: anywhere;
       }
 
       .add-to-cart-button {

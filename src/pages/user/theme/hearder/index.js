@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import "./style.scss";
 import {
   AiOutlineFacebook,
@@ -10,15 +10,18 @@ import {
   AiOutlinePhone,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { formater } from "utils/fomater";
 import { ROUTER } from "utils/router";
 import logo from "assets/user/image/background/logorm.png";
 import ToastNotify from "pages/component/ToastNotify";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isShowCategories, setShowCategories] = useState(true);
   const [activeMenu, setActiveMenu] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
 
   const [menus] = useState([
     {
@@ -58,6 +61,30 @@ const Header = () => {
     },
   ]);
 
+  useEffect(() => {
+    const isLoggedIn = window.localStorage.getItem("isLoggedIn");
+    const storedUsername = window.localStorage.getItem("username");
+
+    if (isLoggedIn) {
+      setIsLoggedIn(true);
+      setUsername(storedUsername);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("username");
+    setIsLoggedIn(false);
+    navigate("/", {
+      state: {
+        notify: {
+          type: "success",
+          message: "Đăng xuất thành công",
+        },
+      },
+    });
+  };
+
   return (
     <div className="containerHeader">
       <ToastNotify />
@@ -96,16 +123,31 @@ const Header = () => {
                       <AiOutlineGlobal />
                     </Link>
                   </li>
-                  <li>
-                    <span>
-                      <a href="/dang-nhap">Đăng nhập</a>
-                    </span>
-                  </li>
-                  <li>
-                    <span>
-                      <a href="/dang-ky">Đăng ký</a>
-                    </span>
-                  </li>
+                  {isLoggedIn ? (
+                    <>
+                      <li>
+                        <span style={{ color: "white" }}>
+                          Xin chào, {username}
+                        </span>
+                      </li>
+                      <li>
+                        <span onClick={handleLogout}>Đăng xuất</span>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li>
+                        <span>
+                          <Link to="/dang-nhap">Đăng nhập</Link>
+                        </span>
+                      </li>
+                      <li>
+                        <span>
+                          <Link to="/dang-ky">Đăng ký</Link>
+                        </span>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>

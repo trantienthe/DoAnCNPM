@@ -34,22 +34,22 @@ const Header = () => {
     },
     {
       name: "Sản phẩm",
-      path: "/gioi-thieu",
-      isShowSubmenu: false,
-      child: [
-        {
-          name: "Thuốc lẻ",
-          path: "/",
-        },
-        {
-          name: "Thuốc hộp",
-          path: "/",
-        },
-        {
-          name: "Hỗ trợ",
-          path: "/gioi-thieu",
-        },
-      ],
+      path: ROUTER.USER.PRODUCTPAGE,
+      // isShowSubmenu: false,
+      // child: [
+      //   {
+      //     name: "Thuốc lẻ",
+      //     path: "/",
+      //   },
+      //   {
+      //     name: "Thuốc hộp",
+      //     path: "/",
+      //   },
+      //   {
+      //     name: "Hỗ trợ",
+      //     path: "/gioi-thieu",
+      //   },
+      // ],
     },
     {
       name: "Bài viết",

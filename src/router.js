@@ -10,6 +10,7 @@ import Register from "pages/user/register";
 import { Fragment } from "react";
 import BuyLayout from "pages/user/theme/buyLayout";
 import ProductDetail from "pages/user/productDetail";
+import productPage from "pages/user/productPage";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -17,6 +18,11 @@ const renderUserRouter = () => {
       path: ROUTER.USER.HOME,
       component: HomePage,
       layout: MasterLayout,
+    },
+    {
+      path: ROUTER.USER.PRODUCTPAGE,
+      component: productPage,
+      layout: BuyLayout,
     },
     {
       path: ROUTER.USER.PROFILE,

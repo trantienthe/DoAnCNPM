@@ -1,53 +1,129 @@
 @use "sass:map";
 
-.container{
-    max-width: 1200px;
+.container {
+  .cart {
+    margin-bottom: 50px !important;
+    margin-top: 50px !important;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 
-    .cart{
-        margin-bottom: 50px !important;
+    .cart-left {
+      width: 68%;
+      height: max-content;
+      border-top-left-radius: 70px;
+      border-bottom-right-radius: 70px;
+      border: 7px solid #b5c0ea;
+
+      .item {
+        padding: 30px;
         display: flex;
-        justify-content: center;
-        border-radius: 10px;
-        background-color: aqua;
-    
-        
-        .cart-left{
-            width: 70%;
 
-            .cart-left-table{
-                display: block;
-                width: 100%;
+        .item-image {
+          width: 15%;
+          height: 70px;
 
-                thread{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    tr {
-                        display: flex;
-                        justify-content: space-between;
-                        width: 100%;
-                    }
-                }
-
-                tbody{
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    tr {
-                        display: flex;
-                        justify-content: space-between;
-                        width: 100%;
-                    }
-                }
-            } 
+          img {
+            width: 70px;
+            height: 100%;
+          }
         }
 
-        .cart-right{
-            width: 30%;
-            background-color: yellow;
+        .item-details {
+          display: flex;
+          width: 85%;
+          gap: 15px;
+
+          .item-name {
+            width: 150px;
+            height: 100%;
+            font-size: 16px;
+            color: rgb(112, 132, 223);
+          }
+          .item-price {
+            width: 150px;
+            font-size: 16px;
+            color: rgb(112, 132, 223);
+          }
+          .quantity-input {
+            width: 40px;
+            height: 40px;
+            color: rgb(112, 132, 223);
+            text-align: center;
+            font-size: 20px;
+          }
+          .item-total {
+            width: 150px;
+            color: rgb(112, 132, 223);
+            font-size: 16px;
+          }
+          .update-btn {
+            width: 120px;
+            height: 40px;
+            color: rgb(0, 0, 0);
+            border: 1px solid rgb(163, 163, 225);
+            background: rgb(158, 180, 223);
+            border-radius: 40px;
+            font-size: 16px;
+
+            &:hover {
+              background: red;
+              color: white;
+            }
+          }
+          .remove-btn {
+            width: 120px;
+            height: 40px;
+            color: rgb(0, 0, 0);
+            border: 1px solid rgb(163, 163, 225);
+            background: rgb(158, 180, 223);
+            border-radius: 40px;
+            font-size: 16px;
+
+            &:hover {
+              background: red;
+              color: white;
+            }
+          }
         }
+      }
     }
-}
 
+    .cart-right {
+      position: sticky;
+      top: 0px;
+      width: 32%;
+      height: 400px;
+      border-top-left-radius: 70px;
+      border-bottom-right-radius: 70px;
+      border: 7px solid #b5c0ea;
+
+      h2 {
+        padding: 30px;
+        font-size: 18px;
+        color: #8396e4;
+      }
+      .cart_right_button {
+        height: 40px;
+        width: 220px;
+        border: 1px solid black;
+        border-radius: 35px;
+        font-size: 18px;
+        font-weight: 900;
+        background: rgb(132, 132, 222);
+        margin: 0 auto;
+        display: block;
+
+        &:hover {
+          background: red;
+          color: white;
+        }
+      }
+
+      p {
+        padding: 10px 30px 30px 30px;
+        font-size: 12px;
+      }
+    }
+  }
+}

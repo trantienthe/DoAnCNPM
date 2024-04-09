@@ -11,6 +11,7 @@ import { Fragment } from "react";
 import BuyLayout from "pages/user/theme/buyLayout";
 import ProductDetail from "pages/user/productDetail";
 import productPage from "pages/user/productPage";
+import Payment from "pages/user/payment";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -47,6 +48,11 @@ const renderUserRouter = () => {
     {
       path: ROUTER.USER.PRODUCTDETAIL,
       component: ProductDetail,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.PAYMENT,
+      component: Payment,
       layout: BuyLayout,
     },
   ];

@@ -263,7 +263,6 @@ const HomePage = () => {
           ))}
         </Carousel>
       </div>
-
       {/*Categories End*/}
 
       {/*Featured Begin*/}

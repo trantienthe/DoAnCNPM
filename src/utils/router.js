@@ -8,5 +8,6 @@ export const ROUTER = {
     REGISTER: "/dang-ky",
     PRODUCTDETAIL: "/chi-tiet-san-pham/:id",
     PRODUCTPAGE: "/san-pham-cua-hang",
+    PAYMENT: "thanh-toan",
   },
 };

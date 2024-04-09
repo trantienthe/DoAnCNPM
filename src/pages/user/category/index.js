@@ -13,34 +13,7 @@ const CategoryLayout = () => {
     <>
       <div className="container">
         <div className="row hero_categories_container">
-          <div className="col-lg-3 hero_categories">
-            <div
-              className="hero_categories_all"
-              onClick={() => setShowCategories(!isShowCategories)}
-            >
-              <AiOutlineMenu />
-              Danh sách sản phẩm
-            </div>
-            <ul className={isShowCategories ? "" : "hidden"}>
-              <li>
-                <Link to={"#"}>Người lớn</Link>
-              </li>
-              <li>
-                <Link to={"#"}>Trẻ em</Link>
-              </li>
-              <li>
-                <Link to={"#"}>Đàn ông</Link>
-              </li>
-              <li>
-                <Link to={"#"}>Phụ nữ</Link>
-              </li>
-              <li>
-                <Link to={"#"}>Tất cả</Link>
-              </li>
-            </ul>
-          </div>
-
-          <div className="col-lg-9 hero_search_container">
+          <div className="hero_search_container">
             <div className="hero_search">
               <div className="hero_search_form">
                 <form className="searchForm">

@@ -30,6 +30,7 @@ import axios from "axios";
 
 const HomePage = () => {
   const [medicines, setMedicines] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     const fetchMedicines = async () => {
@@ -61,6 +62,17 @@ const HomePage = () => {
     };
     fetchMedicines();
   }, []);
+
+  const handleAddToCart = async (id) => {
+    try {
+      const response = await axios.post(
+        `http://127.0.0.1:8000/add_to_cart/${id}/`
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
+    }
+  };
 
   const responsive = {
     superLargeDesktop: {
@@ -220,7 +232,9 @@ const HomePage = () => {
                     </Link>
                   </li>
                   <li>
-                    <AiOutlineShoppingCart />
+                    <Link onClick={() => handleAddToCart(item.id)}>
+                      <AiOutlineShoppingCart />
+                    </Link>
                   </li>
                 </ul>
               </div>

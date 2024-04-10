@@ -49,7 +49,6 @@
   justify-content: flex-end;
   align-items: center;
   padding: 10px 0 13px;
-  font-weight: bold;
 
   ul {
     display: flex;
@@ -68,7 +67,7 @@
       margin-left: 10px;
 
       span {
-        font-size: 14px;
+        font-size: 16px;
         margin-left: 2px;
         color: map.get($theme-colors, "color-white");
       }

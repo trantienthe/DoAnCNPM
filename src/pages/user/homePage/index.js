@@ -27,10 +27,19 @@ import {
 import { Link } from "react-router-dom";
 import { formater } from "utils/fomater";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [username, setUsername] = useState(null);
+
+  useEffect(() => {
+    const newUsername = window.localStorage.getItem("username");
+    if (newUsername) {
+      setUsername(newUsername);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchMedicines = async () => {
@@ -64,11 +73,20 @@ const HomePage = () => {
   }, []);
 
   const handleAddToCart = async (id) => {
+    if (!username) {
+      // toast error login
+      toast.error("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng !!!");
+      return;
+    }
+
     try {
-      const response = await axios.post(
-        `http://127.0.0.1:8000/add_to_cart/${id}/`
-      );
+      const response = await axios.post(`http://127.0.0.1:8000/api/cart/add/`, {
+        medicine_id: id,
+        username: username,
+      });
+
       console.log(response.data);
+      toast.success("Đã thêm vào giỏ hàng !!!");
     } catch (error) {
       console.error("Lỗi khi thêm vào giỏ hàng:", error);
     }

@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./style.scss";
 import anhsp1 from "assets/user/image/product/thuoc4.jpg";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [username, setUsername] = useState(null);
+
+  const [newQuantities, setNewQuantities] = useState({});
 
   const totalPrice = cartItems.reduce((total, item) => {
     return total + item.medicine.medicine_price * item.quantity;
@@ -20,7 +25,6 @@ const Cart = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (!username) {
-        // toast error login
         //toast.error("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng !!!");
         return;
       }
@@ -41,6 +45,72 @@ const Cart = () => {
 
     fetchData();
   }, [username]);
+
+  const removeFromCart = async (itemId) => {
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:8000/api/remove_from_cart/${itemId}/`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Xóa sản phẩm không thành công !!!");
+      }
+      setCartItems(cartItems.filter((item) => item.id_cart !== itemId));
+      toast.success("Xóa sản phẩm thành công");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateCartItemQuantity = async (itemId, newQuantity) => {
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/update_quantity/${itemId}/`,
+        { quantity: newQuantity },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status !== 200) {
+        throw new Error("Cập nhật số lượng không thành công !!!");
+      }
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.id_cart === itemId) {
+          return { ...item, quantity: newQuantity };
+        }
+        return item;
+      });
+      setCartItems(updatedCartItems);
+      toast.success("Cập nhật số lượng thành công");
+    } catch (error) {
+      console.error(error);
+      toast.error("Cập nhật số lượng không thành công");
+    }
+  };
+
+  // Hàm tăng số lượng sản phẩm
+  const increaseQuantity = (itemId) => {
+    const currentQuantity =
+      newQuantities[itemId] ||
+      cartItems.find((item) => item.id_cart === itemId)?.quantity ||
+      1;
+    const updatedQuantity = currentQuantity + 1;
+    setNewQuantities({ ...newQuantities, [itemId]: updatedQuantity });
+  };
+
+  // Hàm giảm số lượng sản phẩm
+  const decreaseQuantity = (itemId) => {
+    const currentQuantity =
+      newQuantities[itemId] ||
+      cartItems.find((item) => item.id_cart === itemId)?.quantity ||
+      1;
+    const updatedQuantity = Math.max(currentQuantity - 1, 1);
+    setNewQuantities({ ...newQuantities, [itemId]: updatedQuantity });
+  };
 
   return (
     <>
@@ -69,18 +139,44 @@ const Cart = () => {
                   <p className="item-price">
                     {item.medicine.medicine_price} VND{" "}
                   </p>
+                  <button
+                    className="quantity-btn"
+                    onClick={() => decreaseQuantity(item.id_cart)}
+                  >
+                    -
+                  </button>
                   <input
-                    type="number"
+                    type="text"
                     className="quantity-input"
-                    min="1"
-                    max=""
-                    value={item.quantity}
+                    value={newQuantities[item.id_cart] || item.quantity}
+                    readOnly
                   />
+                  <button
+                    className="quantity-btn"
+                    onClick={() => increaseQuantity(item.id_cart)}
+                  >
+                    +
+                  </button>
                   <p className="item-total">
                     {item.medicine.medicine_price * item.quantity} VNĐ
                   </p>
-                  <button className="update-btn">Cập nhật</button>
-                  <button className="remove-btn">Xóa</button>
+                  <button
+                    className="update-btn"
+                    onClick={() =>
+                      updateCartItemQuantity(
+                        item.id_cart,
+                        newQuantities[item.id_cart] || item.quantity
+                      )
+                    }
+                  >
+                    Cập nhật
+                  </button>
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeFromCart(item.id_cart)}
+                  >
+                    Xóa
+                  </button>
                 </div>
               </div>
             ))}
@@ -91,7 +187,9 @@ const Cart = () => {
             <h2>Phí vận chuyển: 0 VNĐ</h2>
             <hr />
             <h2>Thành tiền: {totalPrice} VNĐ</h2>
-            <button className="cart_right_button">Hoàn tất</button>
+            <Link to="/thanh-toan">
+              <button className="cart_right_button">Hoàn tất</button>
+            </Link>
             <p>
               Bằng việc tiến hành đặt mua hàng, bạn đồng ý với điều khoản dịch
               vụ, Chính sách thu nhập và xử lý dữ liệu cá nhân của Nhà Thuốc An

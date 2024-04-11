@@ -3,11 +3,21 @@ import "./style.scss";
 
 import React from "react";
 import { AiOutlineMenu, AiOutlinePhone } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 
 const CategoryLayout = () => {
-  const [isShowCategories, setShowCategories] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    navigate(`/tim-kiem?q=${searchQuery}`);
+  };
 
   return (
     <>
@@ -16,8 +26,13 @@ const CategoryLayout = () => {
           <div className="hero_search_container">
             <div className="hero_search">
               <div className="hero_search_form">
-                <form className="searchForm">
-                  <input type="text" placeholder="Bạn đang tìm gì?"></input>
+                <form className="searchForm" onSubmit={handleSearchSubmit}>
+                  <input
+                    type="text"
+                    placeholder="Bạn đang tìm gì?"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                  ></input>
                   <button type="submit">
                     <CiSearch className="iconSearch" />
                   </button>

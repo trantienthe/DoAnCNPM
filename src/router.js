@@ -12,6 +12,7 @@ import BuyLayout from "pages/user/theme/buyLayout";
 import ProductDetail from "pages/user/productDetail";
 import productPage from "pages/user/productPage";
 import Payment from "pages/user/payment";
+import Search from "pages/user/search";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -53,6 +54,11 @@ const renderUserRouter = () => {
     {
       path: ROUTER.USER.PAYMENT,
       component: Payment,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.SEARCH,
+      component: Search,
       layout: BuyLayout,
     },
   ];

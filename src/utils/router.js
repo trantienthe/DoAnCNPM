@@ -9,5 +9,6 @@ export const ROUTER = {
     PRODUCTDETAIL: "/chi-tiet-san-pham/:id",
     PRODUCTPAGE: "/san-pham-cua-hang",
     PAYMENT: "thanh-toan",
+    SEARCH: "tim-kiem",
   },
 };

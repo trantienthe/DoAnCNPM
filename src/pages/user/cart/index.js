@@ -68,24 +68,20 @@ const Cart = () => {
     try {
       const response = await axios.put(
         `http://127.0.0.1:8000/api/update_quantity/${itemId}/`,
-        { quantity: newQuantity },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { new_quantity: newQuantity }
       );
-      if (response.status !== 200) {
+      if (response.status === 200) {
+        const updatedCartItems = cartItems.map((item) => {
+          if (item.id_cart === itemId) {
+            return { ...item, quantity: newQuantity };
+          }
+          return item;
+        });
+        setCartItems(updatedCartItems);
+        toast.success("Cập nhật số lượng thành công");
+      } else {
         throw new Error("Cập nhật số lượng không thành công !!!");
       }
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.id_cart === itemId) {
-          return { ...item, quantity: newQuantity };
-        }
-        return item;
-      });
-      setCartItems(updatedCartItems);
-      toast.success("Cập nhật số lượng thành công");
     } catch (error) {
       console.error(error);
       toast.error("Cập nhật số lượng không thành công");
@@ -114,90 +110,104 @@ const Cart = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="cart">
-          <div className="cart-left">
-            <div className="item-header">
-              <div className="item-image">Hình ảnh</div>
-              <div className="item-name">Tên sản phẩm</div>
-              <div className="item-price">Giá tiền</div>
-              <div className="item-quantity">Số lượng</div>
-              <div className="item-total">Thành tiền</div>
-              <div className="item-actions">Hành động</div>
-            </div>
-            <hr />
-            {cartItems.map((item) => (
-              <div key={item.id} className="item">
-                <div className="item-image">
-                  <img
-                    src={`http://localhost:8000/static/${item.medicine.medicine_img}`}
-                    alt="Mô tả ảnh sản phẩm"
-                  />
-                </div>
-                <div className="item-details">
-                  <p className="item-name">{item.medicine.medicine_name}</p>
-                  <p className="item-price">
-                    {item.medicine.medicine_price} VND{" "}
-                  </p>
-                  <button
-                    className="quantity-btn"
-                    onClick={() => decreaseQuantity(item.id_cart)}
-                  >
-                    -
-                  </button>
-                  <input
-                    type="text"
-                    className="quantity-input"
-                    value={newQuantities[item.id_cart] || item.quantity}
-                    readOnly
-                  />
-                  <button
-                    className="quantity-btn"
-                    onClick={() => increaseQuantity(item.id_cart)}
-                  >
-                    +
-                  </button>
-                  <p className="item-total">
-                    {item.medicine.medicine_price * item.quantity} VNĐ
-                  </p>
-                  <button
-                    className="update-btn"
-                    onClick={() =>
-                      updateCartItemQuantity(
-                        item.id_cart,
-                        newQuantities[item.id_cart] || item.quantity
-                      )
-                    }
-                  >
-                    Cập nhật
-                  </button>
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromCart(item.id_cart)}
-                  >
-                    Xóa
-                  </button>
-                </div>
+      {cartItems.length === 0 ? (
+        <p
+          style={{
+            height: "calc(100vh - 150px - 305px)",
+            textAlign: "center",
+            lineHeight: "calc(100vh - 150px - 305px)",
+            color: "red",
+            fontSize: "16px",
+          }}
+        >
+          Không có sản phẩm trong giỏ hàng
+        </p>
+      ) : (
+        <div className="container">
+          <div className="cart">
+            <div className="cart-left">
+              <div className="item-header">
+                <div className="item-image">Hình ảnh</div>
+                <div className="item-name">Tên sản phẩm</div>
+                <div className="item-price">Giá tiền</div>
+                <div className="item-quantity">Số lượng</div>
+                <div className="item-total">Thành tiền</div>
+                <div className="item-actions">Hành động</div>
               </div>
-            ))}
-          </div>
-          <div className="cart-right">
-            {/* Tính toán tổng giá */}
-            <h2>Tổng tiền đơn hàng: {totalPrice} VNĐ</h2>
-            <h2>Phí vận chuyển: 0 VNĐ</h2>
-            <hr />
-            <h2>Thành tiền: {totalPrice} VNĐ</h2>
-            <Link to="/thanh-toan">
-              <button className="cart_right_button">Hoàn tất</button>
-            </Link>
-            <p>
-              Bằng việc tiến hành đặt mua hàng, bạn đồng ý với điều khoản dịch
-              vụ, Chính sách thu nhập và xử lý dữ liệu cá nhân của Nhà Thuốc An
-              Tâm
-            </p>
+              <hr />
+              {cartItems.map((item) => (
+                <div key={item.id} className="item">
+                  <div className="item-image">
+                    <img
+                      src={`http://localhost:8000/static/${item.medicine.medicine_img}`}
+                      alt="Mô tả ảnh sản phẩm"
+                    />
+                  </div>
+                  <div className="item-details">
+                    <p className="item-name">{item.medicine.medicine_name}</p>
+                    <p className="item-price">
+                      {item.medicine.medicine_price} VND{" "}
+                    </p>
+                    <button
+                      className="quantity-btn"
+                      onClick={() => decreaseQuantity(item.id_cart)}
+                    >
+                      -
+                    </button>
+                    <input
+                      type="text"
+                      className="quantity-input"
+                      value={newQuantities[item.id_cart] || item.quantity}
+                      readOnly
+                    />
+                    <button
+                      className="quantity-btn"
+                      onClick={() => increaseQuantity(item.id_cart)}
+                    >
+                      +
+                    </button>
+                    <p className="item-total">
+                      {item.medicine.medicine_price * item.quantity} VNĐ
+                    </p>
+                    <button
+                      className="update-btn"
+                      onClick={() =>
+                        updateCartItemQuantity(
+                          item.id_cart,
+                          newQuantities[item.id_cart] || item.quantity
+                        )
+                      }
+                    >
+                      Cập nhật
+                    </button>
+                    <button
+                      className="remove-btn"
+                      onClick={() => removeFromCart(item.id_cart)}
+                    >
+                      Xóa
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="cart-right">
+              {/* Tính toán tổng giá */}
+              <h2>Tổng tiền đơn hàng: {totalPrice} VNĐ</h2>
+              <h2>Phí vận chuyển: 0 VNĐ</h2>
+              <hr />
+              <h2>Thành tiền: {totalPrice} VNĐ</h2>
+              <Link to="/thanh-toan">
+                <button className="cart_right_button">Hoàn tất</button>
+              </Link>
+              <p>
+                Bằng việc tiến hành đặt mua hàng, bạn đồng ý với điều khoản dịch
+                vụ, Chính sách thu nhập và xử lý dữ liệu cá nhân của Nhà Thuốc
+                An Tâm
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

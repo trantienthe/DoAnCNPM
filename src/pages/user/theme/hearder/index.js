@@ -1,20 +1,19 @@
+import logo from "assets/user/image/background/logorm.png";
+import ToastNotify from "pages/component/ToastNotify";
 import { memo, useEffect, useState } from "react";
-import "./style.scss";
 import {
   AiOutlineFacebook,
   AiOutlineGlobal,
   AiOutlineInstagram,
   AiOutlineLinkedin,
   AiOutlineMail,
-  AiOutlineMenu,
-  AiOutlinePhone,
-  AiOutlineShoppingCart,
 } from "react-icons/ai";
+import { BsCartCheckFill } from "react-icons/bs";
+import { RiChatHistoryFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import { formater } from "utils/fomater";
 import { ROUTER } from "utils/router";
-import logo from "assets/user/image/background/logorm.png";
-import ToastNotify from "pages/component/ToastNotify";
+import "./style.scss";
+import { IoMdPhonePortrait } from "react-icons/io";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -22,6 +21,7 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [cartCount, setCartCount] = useState(0);
 
   const [menus] = useState([
     {
@@ -71,6 +71,29 @@ const Header = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/api/cart/item/${username}/`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const newCartCount = data.reduce((count, cartItem) => {
+            return count + cartItem.quantity;
+          }, 0);
+          setCartCount(newCartCount);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (username) {
+      fetchData();
+    }
+  }, [username]);
+
   const handleLogout = () => {
     window.localStorage.removeItem("isLoggedIn");
     window.localStorage.removeItem("username");
@@ -98,6 +121,12 @@ const Header = () => {
                   antam@gmail.com
                 </li>
                 <li>Trung tâm tiêm chủng An Tâm</li>
+                <Link className="linkToPage" to={"/lien-he"}>
+                  <li>
+                    <IoMdPhonePortrait />
+                    Tư vấn: 1800 1008
+                  </li>
+                </Link>
               </ul>
             </div>
             <div className="col-6 header_top_right">
@@ -194,12 +223,22 @@ const Header = () => {
           <div className="col-xl-3">
             <div className="header_cart">
               <div className="header_cart_price">
-                <span>{formater(10123456)}</span>
+                {/* <span>{formater(10123456)}</span> */}
               </div>
               <ul>
+                {isLoggedIn && (
+                  <li>
+                    <Link to="/lich-su-mua-hang">
+                      <RiChatHistoryFill className="icon_header_icon" />
+                      Lịch sử
+                    </Link>
+                  </li>
+                )}
                 <li>
                   <Link to="/gio-hang">
-                    <AiOutlineShoppingCart /> <span>5</span>
+                    <BsCartCheckFill className="icon_header_icon" />{" "}
+                    {cartCount > 0 && <span>{cartCount}</span>}
+                    Giỏ hàng
                   </Link>
                 </li>
               </ul>

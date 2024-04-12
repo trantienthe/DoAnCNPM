@@ -7,15 +7,15 @@
 
   .container_slider {
     .container_slider_item {
-      border: 3px solid rgb(64, 33, 136);
-      height: 300px;
-      width: 240px;
+      // border: 1px solid black;
+      height: 250px;
+      width: 250px;
       position: relative;
       background-repeat: no-repeat;
-      background-size: cover;
-      background-position: top center;
+      background-size: contain;
+      background-position: center;
       margin-top: 20px;
-      border-radius: 50px;
+      border-radius: 10px;
 
       p {
         position: absolute;

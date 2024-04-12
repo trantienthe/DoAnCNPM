@@ -7,7 +7,6 @@
 
   .container_slider {
     .container_slider_item {
-      border: 3px solid rgb(64, 33, 136);
       height: 300px;
       width: 240px;
       position: relative;
@@ -15,7 +14,8 @@
       background-size: cover;
       background-position: top center;
       margin-top: 20px;
-      border-radius: 50px;
+      border-radius: 10px;
+      transition: transform 0.3s;
 
       p {
         position: absolute;
@@ -35,6 +35,9 @@
           background: rgb(231, 127, 98);
         }
       }
+    }
+    .container_slider_item:hover {
+      transform: scale(1.1);
     }
 
     .react-multi-carousel-item:not(:first-child):not(:last-child) {

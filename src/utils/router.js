@@ -10,5 +10,6 @@ export const ROUTER = {
     PRODUCTPAGE: "/san-pham-cua-hang",
     PAYMENT: "thanh-toan",
     SEARCH: "tim-kiem",
+    PRODUCTCATEGORY: "san-pham-danh-muc/:categoryName",
   },
 };

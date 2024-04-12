@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import { Slide } from "react-slideshow-image";
 import Slideshow from "../theme/slider";
 import parse from "html-react-parser";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const ProductDetail = () => {
   const [showMore, setShowMore] = useState(false);
@@ -29,6 +31,28 @@ const ProductDetail = () => {
     const newQuantity = parseInt(e.target.value);
     if (!isNaN(newQuantity)) {
       setQuantity(newQuantity);
+    }
+  };
+
+  const handleAddToCart = async (id, quantity) => {
+    const username = window.localStorage.getItem("username");
+    if (!username) {
+      // toast error login
+      toast.error("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng !!!");
+      return;
+    }
+
+    try {
+      const response = await axios.post(`http://127.0.0.1:8000/api/cart/add/`, {
+        medicine_id: id,
+        username: username,
+        quantity: quantity,
+      });
+
+      console.log(response.data);
+      toast.success("Đã thêm vào giỏ hàng !!!");
+    } catch (error) {
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
     }
   };
 
@@ -61,7 +85,12 @@ const ProductDetail = () => {
               </div>
               <p className="product-description">{parse(product.content)}</p>
 
-              <button className="add-to-cart-button">Thêm vào giỏ hàng</button>
+              <button
+                className="add-to-cart-button"
+                onClick={() => handleAddToCart(product.id_medicine, quantity)}
+              >
+                Thêm vào giỏ hàng
+              </button>
             </div>
           </div>
 

@@ -5,12 +5,17 @@
   position: relative;
 
   .hero_categories_all {
-    background: #7c8dea;
+    background: #a4afed;
     padding: 15px 25px 15px 40px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    font-weight: 700;
+    color: white;
+    font-size: 18px;
+
+    &:hover {
+      color: #000;
+    }
 
     svg,
     span {
@@ -28,28 +33,27 @@
     position: absolute;
     opacity: 1;
     border: 1px solid #ebebeb;
-    width: 99%;
-    background: white;
+    width: 100%;
+    padding-bottom: 20px;
     transition: all 0.2s;
 
     li {
+      margin-top: 20px;
       list-style: none;
 
       a {
         text-decoration: none;
         background-color: transparent;
         font-size: 16px;
-        color: map.get($theme-colors, "normal_text");
+        color: rgb(1, 1, 1);
         line-height: 39px;
         display: block;
-        padding-left: 40px;
+        // padding-left: 40px;
       }
 
       &:hover {
-        background: rgb(224, 225, 195);
-
         a {
-          color: map.get($theme-colors, "main");
+          color: rgb(93, 132, 188);
         }
       }
     }

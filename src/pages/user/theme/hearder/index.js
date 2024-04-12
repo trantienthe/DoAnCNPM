@@ -161,7 +161,7 @@ const Header = () => {
             <div className="header_logo">
               <img src={logo} alt="logo" />
               <h1>
-                <Link to="/">AN TÂM</Link>
+                <Link to="/">An Tâm</Link>
               </h1>
             </div>
           </div>

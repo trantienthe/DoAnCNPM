@@ -67,7 +67,17 @@ const Search = () => {
           </div>
         </div>
       ) : (
-        <p>Không có kết quả tìm kiếm.</p>
+        <p
+          style={{
+            height: "calc(100vh - 150px - 305px)",
+            textAlign: "center",
+            lineHeight: "calc(100vh - 150px - 305px)",
+            color: "red",
+            fontSize: "16px",
+          }}
+        >
+          Không có kết quả tìm kiếm.
+        </p>
       )}
     </>
   );

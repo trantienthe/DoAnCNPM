@@ -32,14 +32,6 @@ import { toast } from "react-toastify";
 const HomePage = () => {
   const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [username, setUsername] = useState(null);
-
-  useEffect(() => {
-    const newUsername = window.localStorage.getItem("username");
-    if (newUsername) {
-      setUsername(newUsername);
-    }
-  }, []);
 
   useEffect(() => {
     const fetchMedicines = async () => {
@@ -73,6 +65,7 @@ const HomePage = () => {
   }, []);
 
   const handleAddToCart = async (id) => {
+    const username = window.localStorage.getItem("username");
     if (!username) {
       // toast error login
       toast.error("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng !!!");

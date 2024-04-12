@@ -53,6 +53,12 @@ const HomePage = () => {
             name: medicine.name_medicine,
             price: medicine.price,
           });
+          // Sắp xếp sản phẩm theo thời gian giảm dần
+          acc[category].products.sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+          );
+          // Chỉ lấy 8 sản phẩm đầu tiên
+          acc[category].products = acc[category].products.slice(0, 8);
           return acc;
         }, {});
 

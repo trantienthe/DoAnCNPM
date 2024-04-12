@@ -13,6 +13,7 @@ import ProductDetail from "pages/user/productDetail";
 import productPage from "pages/user/productPage";
 import Payment from "pages/user/payment";
 import Search from "pages/user/search";
+import ProductCategory from "pages/user/productCategory";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -59,6 +60,11 @@ const renderUserRouter = () => {
     {
       path: ROUTER.USER.SEARCH,
       component: Search,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.PRODUCTCATEGORY,
+      component: ProductCategory,
       layout: BuyLayout,
     },
   ];

@@ -32,7 +32,22 @@ import { toast } from "react-toastify";
 const HomePage = () => {
   const [medicines, setMedicines] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [latestProducts, setLatestProducts] = useState([]);
 
+  //useEffect gọi api sản phẩm mới nhất
+  useEffect(() => {
+    const fetchLatestProducts = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        setLatestProducts(response.data.slice(0, 8));
+      } catch (error) {
+        console.error("Lỗi khi tải sản phẩm mới nhất:", error);
+      }
+    };
+    fetchLatestProducts();
+  }, []);
+
+  //useEffect gọi api thuoc theo danh mục
   useEffect(() => {
     const fetchMedicines = async () => {
       try {
@@ -201,12 +216,24 @@ const HomePage = () => {
     <>
       {/*Categories Begin*/}
       <div className="container container_categories_slider">
+        <div className="featured">
+          <div className="section-title">
+            <h2 style={{ paddingTop: "50px" }}>Sản phẩm mới nhất</h2>
+          </div>
+        </div>
         <Carousel responsive={responsive} className="container_slider">
-          {sliderItems.map((item, key) => (
+          {latestProducts.map((product, index) => (
             <div
+              key={index}
               className="container_slider_item"
-              style={{ backgroundImage: `url(${item.bgImg})` }}
-            ></div>
+              style={{
+                backgroundImage: `url(http://127.0.0.1:8000/static/${product.image})`,
+              }}
+            >
+              <Link to={`/chi-tiet-san-pham/${product.id_medicine}`}>
+                Xem chi tiết
+              </Link>
+            </div>
           ))}
         </Carousel>
       </div>

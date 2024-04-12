@@ -17,11 +17,20 @@ const CategoryLayout = () => {
     fetch("http://127.0.0.1:8000/thuoc/")
       .then((response) => response.json())
       .then((data) => {
-        const categoryNames = data.map((item) => item.category.name);
+        const categoryNames = [];
+        const tempCategories = [];
+
+        data.forEach((item) => {
+          if (!tempCategories.includes(item.category.name)) {
+            categoryNames.push(item.category.name);
+            tempCategories.push(item.category.name);
+          }
+        });
+
         setCategories(categoryNames);
       })
       .catch((error) => {
-        console.error("Error fetching categories:", error);
+        console.error("Lỗi khi tải danh sách danh mục:", error);
       });
   }, []);
 

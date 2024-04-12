@@ -2,10 +2,33 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import { formater } from "utils/fomater";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Search = () => {
   // Khai báo state để lưu trữ danh sách sản phẩm từ kết quả tìm kiếm
   const [searchResults, setSearchResults] = useState([]);
+
+  const handleAddToCart = async (id) => {
+    const username = window.localStorage.getItem("username");
+    if (!username) {
+      // toast error login
+      toast.error("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng !!!");
+      return;
+    }
+
+    try {
+      const response = await axios.post(`http://127.0.0.1:8000/api/cart/add/`, {
+        medicine_id: id,
+        username: username,
+      });
+
+      console.log(response.data);
+      toast.success("Đã thêm vào giỏ hàng !!!");
+    } catch (error) {
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
+    }
+  };
 
   let location = useLocation();
   useEffect(() => {
@@ -45,12 +68,16 @@ const Search = () => {
                     >
                       <ul className="featured_item_pic_hover featured_item_pic_hover_custom">
                         <li>
-                          <Link to={`/chi-tiet-san-pham/${product.id}`}>
+                          <Link
+                            to={`/chi-tiet-san-pham/${product.id_medicine}`}
+                          >
                             <AiOutlineEye />
                           </Link>
                         </li>
                         <li>
-                          <AiOutlineShoppingCart />
+                          <AiOutlineShoppingCart
+                            onClick={() => handleAddToCart(product.id_medicine)}
+                          />
                         </li>
                       </ul>
                     </div>

@@ -21,6 +21,7 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
+  const [cartCount, setCartCount] = useState(0);
 
   const [menus] = useState([
     {
@@ -69,6 +70,29 @@ const Header = () => {
       setUsername(storedUsername);
     }
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://127.0.0.1:8000/api/cart/item/${username}/`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          const newCartCount = data.reduce((count, cartItem) => {
+            return count + cartItem.quantity;
+          }, 0);
+          setCartCount(newCartCount);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (username) {
+      fetchData();
+    }
+  }, [username]);
 
   const handleLogout = () => {
     window.localStorage.removeItem("isLoggedIn");
@@ -213,7 +237,7 @@ const Header = () => {
                 <li>
                   <Link to="/gio-hang">
                     <BsCartCheckFill className="icon_header_icon" />{" "}
-                    <span>5</span>
+                    {cartCount > 0 && <span>{cartCount}</span>}
                     Giỏ hàng
                   </Link>
                 </li>

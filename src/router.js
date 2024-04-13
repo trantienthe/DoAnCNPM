@@ -17,6 +17,7 @@ import ProductCategory from "pages/user/productCategory";
 import PostPage from "pages/user/postPage";
 import ContactPage from "pages/user/contactPage";
 import HistoryPage from "pages/user/historyPage";
+import DetailHistory from "pages/user/detailHistory";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -83,6 +84,11 @@ const renderUserRouter = () => {
     {
       path: ROUTER.USER.HISTORYPAGE,
       component: HistoryPage,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.DETAILHISTORY,
+      component: DetailHistory,
       layout: BuyLayout,
     },
   ];

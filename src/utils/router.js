@@ -14,5 +14,6 @@ export const ROUTER = {
     SEARCH: "tim-kiem",
     PRODUCTCATEGORY: "san-pham-danh-muc/:categoryName",
     HISTORYPAGE: "lich-su-don-hang",
+    DETAILHISTORY: "chi-tiet-don-hang/:id",
   },
 };

@@ -1,6 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import "./style.scss";
 import "react-multi-carousel/lib/styles.css";
+import { FcCancel } from "react-icons/fc";
 
 import Carousel from "react-multi-carousel";
 import slide1 from "assets/user/image/product/thuoc4.jpg";
@@ -67,6 +68,7 @@ const HomePage = () => {
             id: medicine.id_medicine,
             name: medicine.name_medicine,
             price: medicine.price,
+            active: medicine.active,
           });
           // Sắp xếp sản phẩm theo thời gian giảm dần
           acc[category].products.sort(
@@ -104,6 +106,10 @@ const HomePage = () => {
     } catch (error) {
       console.error("Lỗi khi thêm vào giỏ hàng:", error);
     }
+  };
+
+  const handleNotToCart = () => {
+    toast.error("Sản phẩm đã hết!");
   };
 
   const responsive = {
@@ -180,9 +186,15 @@ const HomePage = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link onClick={() => handleAddToCart(item.id)}>
-                      <AiOutlineShoppingCart />
-                    </Link>
+                    {item.active ? (
+                      <Link onClick={() => handleAddToCart(item.id)}>
+                        <AiOutlineShoppingCart />
+                      </Link>
+                    ) : (
+                      <Link onClick={() => handleNotToCart()}>
+                        <FcCancel />
+                      </Link>
+                    )}
                   </li>
                 </ul>
               </div>

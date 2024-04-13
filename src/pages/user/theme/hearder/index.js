@@ -155,9 +155,7 @@ const Header = () => {
                   {isLoggedIn ? (
                     <>
                       <li>
-                        <span style={{ color: "white" }}>
-                          Xin chào, {username}
-                        </span>
+                        <span style={{ color: "white" }}>{username}</span>
                       </li>
                       <li>
                         <span onClick={handleLogout}>Đăng xuất</span>

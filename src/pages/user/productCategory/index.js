@@ -4,6 +4,7 @@ import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { formater } from "utils/fomater";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FcCancel } from "react-icons/fc";
 
 const ProductCategory = () => {
   const { categoryName } = useParams();
@@ -28,6 +29,10 @@ const ProductCategory = () => {
     } catch (error) {
       console.error("Lỗi khi thêm vào giỏ hàng:", error);
     }
+  };
+
+  const handleNotToCart = () => {
+    toast.error("Sản phẩm đã hết!");
   };
 
   useEffect(() => {
@@ -71,9 +76,15 @@ const ProductCategory = () => {
                         </Link>
                       </li>
                       <li>
-                        <AiOutlineShoppingCart
-                          onClick={() => handleAddToCart(product.id_medicine)}
-                        />
+                        {product.active ? (
+                          <AiOutlineShoppingCart
+                            onClick={() => handleAddToCart(product.id_medicine)}
+                          />
+                        ) : (
+                          <FcCancel
+                            onClick={() => handleNotToCart(product.id_medicine)}
+                          />
+                        )}
                       </li>
                     </ul>
                   </div>

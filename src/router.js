@@ -14,6 +14,9 @@ import productPage from "pages/user/productPage";
 import Payment from "pages/user/payment";
 import Search from "pages/user/search";
 import ProductCategory from "pages/user/productCategory";
+import PostPage from "pages/user/postPage";
+import ContactPage from "pages/user/contactPage";
+import HistoryPage from "pages/user/historyPage";
 
 const renderUserRouter = () => {
   const userRouters = [
@@ -65,6 +68,21 @@ const renderUserRouter = () => {
     {
       path: ROUTER.USER.PRODUCTCATEGORY,
       component: ProductCategory,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.POSTPAGE,
+      component: PostPage,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.CONTACTPAGE,
+      component: ContactPage,
+      layout: BuyLayout,
+    },
+    {
+      path: ROUTER.USER.HISTORYPAGE,
+      component: HistoryPage,
       layout: BuyLayout,
     },
   ];

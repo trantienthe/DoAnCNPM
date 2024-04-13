@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { CiUser, CiLock } from "react-icons/ci";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import ToastNotify from "pages/component/ToastNotify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactLoading from "react-loading";
+import { MdArrowBackIos } from "react-icons/md";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,6 +51,9 @@ const Login = () => {
     <div className="containers">
       <ToastNotify />
       <div className="wrapper">
+        <Link to={"/"}>
+          <MdArrowBackIos style={{ color: "white" }} />
+        </Link>
         <form action="">
           <h1>
             Đăng nhập{" "}

@@ -223,17 +223,16 @@ const HomePage = () => {
         </div>
         <Carousel responsive={responsive} className="container_slider">
           {latestProducts.map((product, index) => (
-            <div
-              key={index}
-              className="container_slider_item"
-              style={{
-                backgroundImage: `url(http://127.0.0.1:8000/static/${product.image})`,
-              }}
-            >
-              <Link to={`/chi-tiet-san-pham/${product.id_medicine}`}>
-                Xem chi tiết
-              </Link>
-            </div>
+            <Link to={`/chi-tiet-san-pham/${product.id_medicine}`}>
+              <div
+                key={index}
+                className="container_slider_item"
+                style={{
+                  backgroundImage: `url(http://127.0.0.1:8000/static/${product.image})`,
+                }}
+              ></div>
+              {/* <div className="container_slider_link">Xem chi tiết</div> */}
+            </Link>
           ))}
         </Carousel>
       </div>
@@ -243,7 +242,7 @@ const HomePage = () => {
       <div className="container">
         <div className="featured">
           <div className="section-title">
-            <h2>Sản phẩm nổi bật</h2>
+            <h2>Sản phẩm cửa hàng</h2>
           </div>
           {renderFeaturedProducts(medicines)}
         </div>

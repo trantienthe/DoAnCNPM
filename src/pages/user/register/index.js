@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import "./style.scss";
 import { CiUser, CiLock } from "react-icons/ci";
 import ToastNotify from "pages/component/ToastNotify";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ReactLoading from "react-loading";
+import { MdArrowBackIos } from "react-icons/md";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -81,6 +82,9 @@ const Register = () => {
       <ToastNotify />
 
       <div className="wrapper">
+        <Link to={"/"}>
+          <MdArrowBackIos style={{ color: "white" }} />
+        </Link>
         <form onSubmit={handleRegister}>
           <h1>
             Đăng ký{" "}

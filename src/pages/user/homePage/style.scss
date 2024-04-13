@@ -7,6 +7,7 @@
 
   .container_slider {
     .container_slider_item {
+      // border-radius: 1px solid black;
       height: 300px;
       width: 240px;
       position: relative;
@@ -38,6 +39,11 @@
     }
     .container_slider_item:hover {
       transform: scale(1.1);
+    }
+
+    .container_slider_link {
+      padding-left: 80px;
+      color: black;
     }
 
     .react-multi-carousel-item:not(:first-child):not(:last-child) {
@@ -91,6 +97,7 @@
     }
 
     .featured_item {
+      padding-left: 40px;
       margin-bottom: 70px;
 
       &:hover {
@@ -104,8 +111,7 @@
         width: 250px;
         position: relative;
         overflow: hidden;
-
-        border: 3px solid black;
+        border: 1px solid black;
         border-radius: 10px;
 
         .featured_item_pic_hover {
@@ -171,6 +177,7 @@
 }
 
 .banner {
+  padding-left: 115px;
   display: flex;
   gap: 100px;
   margin-bottom: 30px;

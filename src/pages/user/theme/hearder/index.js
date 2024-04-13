@@ -53,11 +53,11 @@ const Header = () => {
     },
     {
       name: "Bài viết",
-      path: "/",
+      path: ROUTER.USER.POSTPAGE,
     },
     {
       name: "Liên hệ",
-      path: "/",
+      path: ROUTER.USER.CONTACTPAGE,
     },
   ]);
 

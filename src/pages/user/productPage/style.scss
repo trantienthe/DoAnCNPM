@@ -146,8 +146,9 @@
 
         h6 {
           margin-top: 10px;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: 400;
+          height: 60px;
 
           a {
             color: black;
@@ -155,11 +156,18 @@
           }
         }
 
+        .featured_item_text_price {
+          padding-top: 5px;
+          text-decoration: line-through;
+          color: #b0add0;
+          font-size: 12px;
+        }
+
         h5 {
-          margin-top: 10px;
-          font-size: 20px;
+          margin-top: 5px;
+          font-size: 16px;
           font-weight: 700;
-          color: #2b23a4;
+          color: #14131e;
         }
       }
     }

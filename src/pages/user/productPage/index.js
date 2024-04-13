@@ -60,6 +60,7 @@ const ProductPage = () => {
                       backgroundSize: "contain",
                     }}
                   >
+                    <div className="featured_item_picc">- 20%</div>
                     <ul className="featured_item_pic_hover featured_item_pic_hover_custom">
                       <li>
                         <Link to={`/chi-tiet-san-pham/${item.id}`}>
@@ -75,7 +76,15 @@ const ProductPage = () => {
                     <h6>
                       <Link to="">{item.name}</Link>
                     </h6>
-                    <h5>{formater(item.price)}</h5>
+                    <h5 className="featured_item_text_price">
+                      {formater(item.price)}
+                    </h5>
+                    <h5>
+                      {" "}
+                      {item.discount_price
+                        ? formater(item.discount_price)
+                        : formater(item.price)}
+                    </h5>
                   </div>
                 </div>
               </div>

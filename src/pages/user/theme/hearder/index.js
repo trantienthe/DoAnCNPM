@@ -53,11 +53,11 @@ const Header = () => {
     },
     {
       name: "Bài viết",
-      path: "/",
+      path: ROUTER.USER.POSTPAGE,
     },
     {
       name: "Liên hệ",
-      path: "/",
+      path: ROUTER.USER.CONTACTPAGE,
     },
   ]);
 
@@ -228,7 +228,7 @@ const Header = () => {
               <ul>
                 {isLoggedIn && (
                   <li>
-                    <Link to="/lich-su-mua-hang">
+                    <Link to="/lich-su-don-hang">
                       <RiChatHistoryFill className="icon_header_icon" />
                       Lịch sử
                     </Link>

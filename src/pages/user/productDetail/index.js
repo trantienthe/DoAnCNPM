@@ -73,9 +73,9 @@ const ProductDetail = () => {
               <div className="product-image-bottom">
                 <img
                   className="product-image-bottom-size"
-                  src={`http://127.0.0.1:8000/static/${product.image1}`}
+                  src={`http://127.0.0.1:8000/static/${product.image}`}
                   alt="1"
-                  onClick={() => setSelectedImage(product.image1)}
+                  onClick={() => setSelectedImage(product.image)}
                 />
                 <img
                   className="product-image-bottom-size"

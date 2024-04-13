@@ -1,6 +1,7 @@
 // HistoryPage.js
 import React, { useEffect, useState } from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
 
 const HistoryPage = () => {
   const [orders, setOrders] = useState([]);
@@ -57,7 +58,7 @@ const HistoryPage = () => {
                   {order.id_order}
                 </div>
                 <div className="container_details_history_quantity">
-                  {order.user}
+                  {order.user.first_name} {order.user.last_name}
                 </div>
                 <div className="container_details_history_image">
                   {order.receiver}
@@ -73,7 +74,9 @@ const HistoryPage = () => {
                 </div>
                 <div className="container_details_history_more">
                   <button className="container_details_history_more_button">
-                    Xem chi tiết
+                    <Link to={`/chi-tiet-don-hang/${order.id_order}`}>
+                      Xem chi tiết
+                    </Link>
                   </button>
                 </div>
               </div>

@@ -114,6 +114,16 @@
         border: 1px solid black;
         border-radius: 10px;
 
+        .featured_item_picc {
+          color: white;
+          padding-top: 2px;
+          text-align: center;
+          background-color: red;
+          height: 25px;
+          width: 70px;
+          border-bottom-right-radius: 10px;
+        }
+
         .featured_item_pic_hover {
           position: absolute;
           left: 0;
@@ -166,8 +176,8 @@
         }
 
         h5 {
-          margin-top: 10px;
-          font-size: 20px;
+          margin-top: 5px;
+          font-size: 16px;
           font-weight: 700;
           color: #2b23a4;
         }

@@ -69,6 +69,7 @@ const ProductCategory = () => {
                       backgroundSize: "contain",
                     }}
                   >
+                    <div className="featured_item_picc">- 20%</div>
                     <ul className="featured_item_pic_hover featured_item_pic_hover_custom">
                       <li>
                         <Link to={`/chi-tiet-san-pham/${product.id_medicine}`}>
@@ -94,7 +95,15 @@ const ProductCategory = () => {
                         {product.name_medicine}
                       </Link>
                     </h6>
-                    <h5>{formater(product.price)}</h5>
+                    <h5 className="featured_item_text_price">
+                      {formater(product.price)}
+                    </h5>
+                    <h5>
+                      {" "}
+                      {product.discount_price
+                        ? formater(product.discount_price)
+                        : formater(product.price)}
+                    </h5>
                   </div>
                 </div>
               </div>

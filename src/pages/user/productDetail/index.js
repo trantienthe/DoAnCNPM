@@ -14,6 +14,14 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const formatPrice = (price) => {
+    const roundedPrice = parseFloat(price).toFixed(2).toString();
+    const formattedPrice = roundedPrice.endsWith(".00")
+      ? roundedPrice.replace(".00", "")
+      : roundedPrice;
+    return formattedPrice;
+  };
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -65,6 +73,7 @@ const ProductDetail = () => {
           <div className="product-detail-container">
             <div className="product-detail-left">
               <div className="product-image">
+                <div className="product-sale">- 20%</div>
                 <img
                   src={`http://127.0.0.1:8000/static/${selectedImage}`}
                   alt="Product"
@@ -99,8 +108,14 @@ const ProductDetail = () => {
             </div>
             <div className="product-detail-right">
               <h2 className="product-title">{product.name_medicine}</h2>
+              <div className="product-price-before">
+                {formatPrice(product.price)} VND
+              </div>
               <div className="product-price">
-                {product.price} VND / {product.unit.name}
+                {product.discount_price
+                  ? formatPrice(product.discount_price)
+                  : formatPrice(product.price)}
+                {" VND "}/ {product.unit.name}
               </div>
               <div className="product-quantity">
                 <label htmlFor="quantity">Chọn số lượng : </label>
@@ -117,7 +132,8 @@ const ProductDetail = () => {
                 Mã : {parse(product.id_medicine)}
               </p>
               <p style={{ paddingTop: "10px" }}>
-                Tình trạng : {product.active ? "Còn hàng" : "Hết hàng"}
+                Tình trạng :{" "}
+                {product.active ? product.stock_quantity : "Hết hàng"}
               </p>
               <p className="product-description">{parse(product.content)}</p>
 

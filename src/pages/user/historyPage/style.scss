@@ -2,4 +2,53 @@
 @import "style/pages/all";
 
 .container {
+  .container_details {
+    .container-information-more {
+      .container_details_history {
+        display: flex;
+        padding-top: 20px;
+
+        .container_details_history_name {
+          width: 20%;
+          text-align: center;
+        }
+        .container_details_history_quantity {
+          width: 20%;
+          text-align: center;
+        }
+
+        .container_details_history_image {
+          width: 20%;
+          text-align: center;
+        }
+        .container_details_history_price {
+          width: 20%;
+          text-align: center;
+        }
+        .container_details_history_status {
+          width: 20%;
+          text-align: center;
+        }
+        .container_details_history_more {
+          width: 20%;
+          text-align: center;
+
+          .container_details_history_more_button {
+            width: 100px;
+            height: 40px;
+            background-color: #6591da;
+            border-radius: 20px;
+            color: white;
+            font-size: 16px;
+
+            &:hover {
+              background-color: red;
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
 }

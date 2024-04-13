@@ -12,6 +12,7 @@ const ProductDetail = () => {
   const [showMore, setShowMore] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const { id } = useParams();
 
@@ -20,6 +21,7 @@ const ProductDetail = () => {
       .then((response) => response.json())
       .then((data) => {
         setProduct(data);
+        setSelectedImage(data.image);
         console.log(data);
       })
       .catch((error) => {
@@ -59,19 +61,47 @@ const ProductDetail = () => {
   return (
     <>
       {product && (
-        <div className="container">
+        <div className="container_details ">
           <div className="product-detail-container">
             <div className="product-detail-left">
               <div className="product-image">
                 <img
-                  src={`http://127.0.0.1:8000/static/${product.image}`}
+                  src={`http://127.0.0.1:8000/static/${selectedImage}`}
                   alt="Product"
+                />
+              </div>
+              <div className="product-image-bottom">
+                <img
+                  className="product-image-bottom-size"
+                  src={`http://127.0.0.1:8000/static/${product.image1}`}
+                  alt="1"
+                  onClick={() => setSelectedImage(product.image1)}
+                />
+                <img
+                  className="product-image-bottom-size"
+                  src={`http://127.0.0.1:8000/static/${product.image2}`}
+                  alt="2"
+                  onClick={() => setSelectedImage(product.image2)}
+                />
+                <img
+                  className="product-image-bottom-size"
+                  src={`http://127.0.0.1:8000/static/${product.image3}`}
+                  alt="3"
+                  onClick={() => setSelectedImage(product.image3)}
+                />
+                <img
+                  className="product-image-bottom-size"
+                  src={`http://127.0.0.1:8000/static/${product.image4}`}
+                  alt="4"
+                  onClick={() => setSelectedImage(product.image4)}
                 />
               </div>
             </div>
             <div className="product-detail-right">
               <h2 className="product-title">{product.name_medicine}</h2>
-              <div className="product-price">{product.price}</div>
+              <div className="product-price">
+                {product.price} VND / {product.unit.name}
+              </div>
               <div className="product-quantity">
                 <label htmlFor="quantity">Chọn số lượng : </label>
                 <input
@@ -83,14 +113,26 @@ const ProductDetail = () => {
                   onChange={handleQuantityChange}
                 />
               </div>
+              <p style={{ paddingTop: "10px" }}>
+                Mã : {parse(product.id_medicine)}
+              </p>
+              <p style={{ paddingTop: "10px" }}>
+                Tình trạng : {product.active ? "Còn hàng" : "Hết hàng"}
+              </p>
               <p className="product-description">{parse(product.content)}</p>
 
-              <button
-                className="add-to-cart-button"
-                onClick={() => handleAddToCart(product.id_medicine, quantity)}
-              >
-                Thêm vào giỏ hàng
-              </button>
+              {product.active ? (
+                <button
+                  className="add-to-cart-button"
+                  onClick={() => handleAddToCart(product.id_medicine, quantity)}
+                >
+                  Thêm vào giỏ hàng
+                </button>
+              ) : (
+                <button className="add-to-cart-button" disabled>
+                  Hết hàng
+                </button>
+              )}
             </div>
           </div>
 

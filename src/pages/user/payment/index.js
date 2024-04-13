@@ -10,6 +10,8 @@ const Payment = () => {
   const [username, setUsername] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [recipientName, setRecipientName] = useState("");
   const [cashOnDelivery, setCashOnDelivery] = useState(false);
   const [isAddressEntered, setIsAddressEntered] = useState(false);
   const [userData, setUserData] = useState({ email: "", fullName: "" });
@@ -17,6 +19,14 @@ const Payment = () => {
   const handleDeliveryAddressChange = (e) => {
     setDeliveryAddress(e.target.value);
     setIsAddressEntered(!!e.target.value);
+  };
+
+  const handlePhoneNumberChange = (e) => {
+    setPhoneNumber(e.target.value);
+  };
+
+  const handleRecipientNameChange = (e) => {
+    setRecipientName(e.target.value);
   };
 
   const handleCashOnDeliveryChange = (e) => {
@@ -36,11 +46,16 @@ const Payment = () => {
       return;
     }
 
-    if (!isAddressEntered || !deliveryAddress) {
+    if (
+      !isAddressEntered ||
+      !deliveryAddress ||
+      !phoneNumber ||
+      !recipientName
+    ) {
       Swal.fire({
         icon: "error",
         title: "óh nooo...",
-        text: "Vui lòng nhập địa chỉ nhận hàng !!!",
+        text: "Vui lòng nhập đầy đủ thông tin !!!",
       });
       return;
     }
@@ -71,6 +86,8 @@ const Payment = () => {
       // Gửi yêu cầu POST đến API để lưu thông tin đơn hàng
       await axios.post(`http://127.0.0.1:8000/api/order/${username}/`, {
         deliveryAddress,
+        phoneNumber,
+        recipientName,
         cashOnDelivery,
       });
       Swal.fire({
@@ -161,11 +178,15 @@ const Payment = () => {
                 className="container__form__input_double"
                 type="text"
                 placeholder="Họ và tên người nhận"
+                value={recipientName}
+                onChange={handleRecipientNameChange}
               />
               <input
                 className="container__form__input_double"
                 type="text"
                 placeholder="Số điện thoại"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
               />
             </div>
             <div className="container__form__div">

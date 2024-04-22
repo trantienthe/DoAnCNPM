@@ -71,7 +71,18 @@ const Search = () => {
                         backgroundSize: "contain",
                       }}
                     >
-                      <div className="featured_item_picc">- 20%</div>
+                      <div
+                        className="featured_item_picc"
+                        style={
+                          product.discount_price ? {} : { display: "none" }
+                        }
+                      >
+                        -{" "}
+                        {((product.price - product.discount_price) /
+                          product.price) *
+                          100}{" "}
+                        %
+                      </div>
                       <ul className="featured_item_pic_hover featured_item_pic_hover_custom">
                         <li>
                           <Link
@@ -102,7 +113,7 @@ const Search = () => {
                         <Link to="">{product.name_medicine}</Link>
                       </h6>
                       <h5 className="featured_item_text_price">
-                        {formater(product.price)}
+                        {product.discount_price && formater(product.price)}
                       </h5>
                       <h5>
                         {" "}

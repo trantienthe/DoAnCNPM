@@ -17,6 +17,7 @@ import featured4 from "assets/user/image/product/thuoc4.jpg";
 import featured5 from "assets/user/image/product/thuoc5.jpg";
 import banner1 from "assets/user/image/categories/Banner1.webp";
 import banner2 from "assets/user/image/categories/Banner2.webp";
+import bottombg1 from "assets/user/image/background/bottombg1.webp";
 
 import { render } from "@testing-library/react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
@@ -29,10 +30,11 @@ import { Link } from "react-router-dom";
 import { formater } from "utils/fomater";
 import axios from "axios";
 import { toast } from "react-toastify";
+import SlideCategories from "pages/component/SlideCategories";
 
 const HomePage = () => {
   const [medicines, setMedicines] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [discountedProducts, setDiscountedProducts] = useState([]);
   const [latestProducts, setLatestProducts] = useState([]);
 
   //useEffect gọi api sản phẩm mới nhất
@@ -41,6 +43,7 @@ const HomePage = () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/thuoc/");
         setLatestProducts(response.data.slice(0, 8));
+        console.log("Sản phẩm liên quan", response);
       } catch (error) {
         console.error("Lỗi khi tải sản phẩm mới nhất:", error);
       }
@@ -56,27 +59,30 @@ const HomePage = () => {
         console.log(response);
 
         const groupedMedicines = response.data.reduce((acc, medicine) => {
-          const category = medicine.category.id;
-          if (!acc[category]) {
-            acc[category] = {
-              title: medicine.category.name,
-              products: [],
-            };
+          if (medicine.category.parent === null) {
+            // Kiểm tra nếu danh mục có parent là null
+            const category = medicine.category.id;
+            if (!acc[category]) {
+              acc[category] = {
+                title: medicine.category.name,
+                products: [],
+              };
+            }
+            acc[category].products.push({
+              img: `http://127.0.0.1:8000/static/${medicine.image}`,
+              id: medicine.id_medicine,
+              name: medicine.name_medicine,
+              price: medicine.price,
+              active: medicine.active,
+              discount_price: medicine.discount_price,
+            });
+            // Sắp xếp sản phẩm theo thời gian giảm dần
+            acc[category].products.sort(
+              (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+            // Chỉ lấy 8 sản phẩm đầu tiên
+            acc[category].products = acc[category].products.slice(0, 8);
           }
-          acc[category].products.push({
-            img: `http://127.0.0.1:8000/static/${medicine.image}`,
-            id: medicine.id_medicine,
-            name: medicine.name_medicine,
-            price: medicine.price,
-            active: medicine.active,
-            discount_price: medicine.discount_price,
-          });
-          // Sắp xếp sản phẩm theo thời gian giảm dần
-          acc[category].products.sort(
-            (a, b) => new Date(b.created_at) - new Date(a.created_at)
-          );
-          // Chỉ lấy 8 sản phẩm đầu tiên
-          acc[category].products = acc[category].products.slice(0, 8);
           return acc;
         }, {});
 
@@ -85,7 +91,24 @@ const HomePage = () => {
         console.error("Lỗi khi tải danh sách thuốc:", error);
       }
     };
+
     fetchMedicines();
+  }, []);
+
+  //useEffect gọi api sản phẩm giảm giá
+  useEffect(() => {
+    const fetchDiscountedProducts = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        const filterProducts = response.data.filter(
+          (productItem) => productItem.discount_price
+        );
+        setDiscountedProducts(filterProducts.slice(0, 4));
+      } catch (error) {
+        console.error("Lỗi khi tải sản phẩm giảm giá:", error);
+      }
+    };
+    fetchDiscountedProducts();
   }, []);
 
   const handleAddToCart = async (id) => {
@@ -180,7 +203,12 @@ const HomePage = () => {
                   backgroundSize: "contain",
                 }}
               >
-                <div className="featured_item_picc">- 20%</div>
+                <div
+                  className="featured_item_picc"
+                  style={item.discount_price ? {} : { display: "none" }}
+                >
+                  - {((item.price - item.discount_price) / item.price) * 100} %
+                </div>
                 <ul className="featured_item_pic_hover">
                   <li>
                     <Link to={`/chi-tiet-san-pham/${item.id}`}>
@@ -205,7 +233,7 @@ const HomePage = () => {
                   <Link to="">{item.name}</Link>
                 </h6>
                 <h5 className="featured_item_text_price">
-                  {formater(item.price)}
+                  {item.discount_price && formater(item.price)}
                 </h5>
                 <h5>
                   {" "}
@@ -236,27 +264,89 @@ const HomePage = () => {
 
   return (
     <>
-      {/*Categories Begin*/}
-      <div className="container container_categories_slider">
+      {/*Featured Sale*/}
+      <div className="container container_custom_sale">
         <div className="featured">
-          <div className="section-title">
-            <h2 style={{ paddingTop: "50px" }}>Sản phẩm mới nhất</h2>
+          <div className="section-title section-title-custom">
+            <img src={bottombg1} />
+            <h3>Flash sale cuối tuần</h3>
+          </div>
+          <div className="row">
+            {discountedProducts.map((product) => (
+              <div className="col-lg-3" key={product.id_medicine}>
+                <div className="featured_item">
+                  <div
+                    className="featured_item_pic"
+                    style={{
+                      background: `url(http://localhost:8000/static/${product.image})`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "center",
+                      backgroundSize: "contain",
+                    }}
+                  >
+                    <div
+                      className="featured_item_picc"
+                      style={product.discount_price ? {} : { display: "none" }}
+                    >
+                      -{" "}
+                      {((product.price - product.discount_price) /
+                        product.price) *
+                        100}{" "}
+                      %
+                    </div>
+                    <ul className="featured_item_pic_hover featured_item_pic_hover_custom">
+                      <li>
+                        <Link to={`/chi-tiet-san-pham/${product.id_medicine}`}>
+                          <AiOutlineEye />
+                        </Link>
+                      </li>
+                      <li>
+                        {product.active ? (
+                          <AiOutlineShoppingCart
+                            onClick={() => handleAddToCart(product.id_medicine)}
+                          />
+                        ) : (
+                          <FcCancel
+                            onClick={() => handleNotToCart(product.id_medicine)}
+                          />
+                        )}
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="featured_item_text featured_item_text_custom">
+                    <h6>
+                      <Link
+                        to={`/chi-tiet-san-pham/${product.id_medicine}`}
+                        className="custom_color"
+                      >
+                        {product.name_medicine}
+                      </Link>
+                    </h6>
+                    <h5 className="featured_item_text_price">
+                      {product.discount_price && formater(product.price)}
+                    </h5>
+                    <h5 className="featured_item_text_price_custom">
+                      {" "}
+                      {product.discount_price
+                        ? formater(product.discount_price)
+                        : formater(product.price)}
+                    </h5>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-        <Carousel responsive={responsive} className="container_slider">
-          {latestProducts.map((product, index) => (
-            <Link to={`/chi-tiet-san-pham/${product.id_medicine}`}>
-              <div
-                key={index}
-                className="container_slider_item"
-                style={{
-                  backgroundImage: `url(http://127.0.0.1:8000/static/${product.image})`,
-                }}
-              ></div>
-              {/* <div className="container_slider_link">Xem chi tiết</div> */}
-            </Link>
-          ))}
-        </Carousel>
+      </div>
+      {/*Featured Sale*/}
+
+      {/*Categories Begin*/}
+      <div style={{ marginTop: "50px" }}>
+        <SlideCategories
+          title="Sản phẩm mới nhất"
+          responsive={responsive}
+          latestProducts={latestProducts}
+        />
       </div>
       {/*Categories End*/}
 

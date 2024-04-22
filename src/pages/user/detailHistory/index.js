@@ -23,7 +23,7 @@ const DetailHistory = () => {
 
   return (
     <div>
-      <div className="container">
+      <div className="container container_custom_sizes">
         <h2 className="container__h2">Giỏ thuốc đã mua</h2>
         <div className="container_details">
           <div className="container_details_border">

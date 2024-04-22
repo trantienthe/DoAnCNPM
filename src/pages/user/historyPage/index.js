@@ -32,7 +32,7 @@ const HistoryPage = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container container_custom_size">
       <div className="container_details ">
         <div className="container-information-more">
           <h2>LỊCH SỬ MUA HÀNG</h2>

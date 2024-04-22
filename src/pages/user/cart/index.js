@@ -12,7 +12,10 @@ const Cart = () => {
   const [newQuantities, setNewQuantities] = useState({});
 
   const totalPrice = cartItems.reduce((total, item) => {
-    return total + item.medicine.medicine_price * item.quantity;
+    const price = item.medicine.discount_price
+      ? item.medicine.discount_price
+      : item.medicine.medicine_price;
+    return total + price * item.quantity;
   }, 0);
 
   useEffect(() => {
@@ -96,6 +99,7 @@ const Cart = () => {
       1;
     const updatedQuantity = currentQuantity + 1;
     setNewQuantities({ ...newQuantities, [itemId]: updatedQuantity });
+    updateCartItemQuantity(itemId, updatedQuantity);
   };
 
   // Hàm giảm số lượng sản phẩm
@@ -106,6 +110,7 @@ const Cart = () => {
       1;
     const updatedQuantity = Math.max(currentQuantity - 1, 1);
     setNewQuantities({ ...newQuantities, [itemId]: updatedQuantity });
+    updateCartItemQuantity(itemId, updatedQuantity);
   };
 
   return (
@@ -146,7 +151,10 @@ const Cart = () => {
                   <div className="item-details">
                     <p className="item-name">{item.medicine.medicine_name}</p>
                     <p className="item-price">
-                      {item.medicine.medicine_price} VND{" "}
+                      {item.medicine.discount_price
+                        ? item.medicine.discount_price
+                        : item.medicine.medicine_price}{" "}
+                      VND
                     </p>
                     <button
                       className="quantity-btn"
@@ -167,9 +175,12 @@ const Cart = () => {
                       +
                     </button>
                     <p className="item-total">
-                      {item.medicine.medicine_price * item.quantity} VNĐ
+                      {item.medicine.discount_price
+                        ? item.medicine.discount_price
+                        : item.medicine.medicine_price}{" "}
+                      VND
                     </p>
-                    <button
+                    {/* <button
                       className="update-btn"
                       onClick={() =>
                         updateCartItemQuantity(
@@ -179,7 +190,7 @@ const Cart = () => {
                       }
                     >
                       Cập nhật
-                    </button>
+                    </button> */}
                     <button
                       className="remove-btn"
                       onClick={() => removeFromCart(item.id_cart)}

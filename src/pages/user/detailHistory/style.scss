@@ -31,7 +31,7 @@
           font-size: 18px;
         }
         .container_details_top_right {
-          margin-left: 470px;
+          margin-left: 480px;
           font-size: 18px;
           color: red;
         }
@@ -60,10 +60,14 @@
           .container_details_top_bottom_display_price {
             width: 25%;
             font-size: 15px;
-            padding-left: 60px;
+            padding-left: 30px;
           }
         }
       }
     }
   }
+}
+
+.container_custom_sizes {
+  padding-bottom: 50px;
 }

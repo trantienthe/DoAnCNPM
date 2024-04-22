@@ -1,18 +1,36 @@
-import React, { useEffect, useState } from "react";
-import "./style.scss";
-import anhsanpham from "assets/user/image/product/thuoc1.jpg";
-import { Link, useParams } from "react-router-dom";
-import { Slide } from "react-slideshow-image";
-import Slideshow from "../theme/slider";
-import parse from "html-react-parser";
-import { toast } from "react-toastify";
 import axios from "axios";
+import parse from "html-react-parser";
+import SlideCategories from "pages/component/SlideCategories";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "./style.scss";
 
 const ProductDetail = () => {
-  const [showMore, setShowMore] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [showMore, setShowMore] = useState(false);
   const [product, setProduct] = useState(null);
+  const [latestProducts, setLatestProducts] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
 
   const formatPrice = (price) => {
     const roundedPrice = parseFloat(price).toFixed(2).toString();
@@ -35,7 +53,25 @@ const ProductDetail = () => {
       .catch((error) => {
         console.error("Error fetching product data:", error);
       });
-  }, []);
+  }, [id]);
+
+  //useEffect gọi api sản phẩm liên quan
+  useEffect(() => {
+    const fetchLatestProducts = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        const filterProducts = response.data.filter(
+          (productItem) =>
+            productItem.category.id === product?.category.id &&
+            productItem.id_medicine !== product?.id_medicine
+        );
+        setLatestProducts(filterProducts.slice(0, 8));
+      } catch (error) {
+        console.error("Lỗi khi tải sản phẩm liên quan:", error);
+      }
+    };
+    fetchLatestProducts();
+  }, [product]);
 
   const handleQuantityChange = (e) => {
     const newQuantity = parseInt(e.target.value);
@@ -73,7 +109,15 @@ const ProductDetail = () => {
           <div className="product-detail-container">
             <div className="product-detail-left">
               <div className="product-image">
-                <div className="product-sale">- 20%</div>
+                <div
+                  className="product-sale"
+                  style={product.discount_price ? {} : { display: "none" }}
+                >
+                  -{" "}
+                  {((product.price - product.discount_price) / product.price) *
+                    100}{" "}
+                  %
+                </div>
                 <img
                   src={`http://127.0.0.1:8000/static/${selectedImage}`}
                   alt="Product"
@@ -109,7 +153,7 @@ const ProductDetail = () => {
             <div className="product-detail-right">
               <h2 className="product-title">{product.name_medicine}</h2>
               <div className="product-price-before">
-                {formatPrice(product.price)} VND
+                {product.discount_price && formatPrice(product.price) + " VND "}
               </div>
               <div className="product-price">
                 {product.discount_price
@@ -124,7 +168,11 @@ const ProductDetail = () => {
                   id="quantity"
                   name="quantity"
                   min="1"
-                  value={quantity}
+                  value={
+                    quantity > product.stock_quantity
+                      ? product.stock_quantity
+                      : quantity
+                  }
                   onChange={handleQuantityChange}
                 />
               </div>
@@ -201,6 +249,16 @@ const ProductDetail = () => {
                 </button>
               </div>
             </div>
+          </div>
+
+          <div className="product-detail-container">
+            {latestProducts.length > 0 && (
+              <SlideCategories
+                title="Sản phẩm liên quan"
+                responsive={responsive}
+                latestProducts={latestProducts}
+              />
+            )}
           </div>
         </div>
       )}

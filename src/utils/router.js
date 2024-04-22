@@ -12,7 +12,7 @@ export const ROUTER = {
     POSTPAGE: "bai-viet",
     CONTACTPAGE: "lien-he",
     SEARCH: "tim-kiem",
-    PRODUCTCATEGORY: "san-pham-danh-muc/:categoryName",
+    PRODUCTCATEGORY: "san-pham-danh-muc/:categoryId",
     HISTORYPAGE: "lich-su-don-hang",
     DETAILHISTORY: "chi-tiet-don-hang/:id",
   },

@@ -4,6 +4,8 @@
 .container {
   .container_details {
     .container-information-more {
+      margin-right: 150px;
+
       .container_details_history {
         display: flex;
         padding-top: 20px;
@@ -51,4 +53,7 @@
       }
     }
   }
+}
+.container_custom_size {
+  max-width: 1411px !important;
 }

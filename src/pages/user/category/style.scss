@@ -29,17 +29,33 @@
     }
   }
 
+  .ul_parent {
+    padding-bottom: 20px;
+    & > li {
+      margin-top: 20px;
+    }
+
+    & > li > a > svg {
+      transition: all 0.2s ease-in-out;
+    }
+
+    & > li:hover > a > svg {
+      transform: rotate(90deg);
+      transition: all 0.2s ease-in-out;
+    }
+  }
+
   ul {
     position: absolute;
     opacity: 1;
     border: 1px solid #ebebeb;
     width: 100%;
-    padding-bottom: 20px;
+
     transition: all 0.2s;
 
     li {
-      margin-top: 20px;
       list-style: none;
+      position: relative;
 
       a {
         text-decoration: none;
@@ -53,12 +69,37 @@
 
       &:hover {
         a {
-          color: rgb(93, 132, 188);
+          color: rgb(14, 37, 69);
         }
       }
     }
+
+    &.show {
+      display: block;
+    }
+
     &.hidden {
       opacity: 0;
+    }
+
+    .ul_category {
+      background-color: #edf0f3;
+      display: block;
+      z-index: 99;
+      position: absolute;
+      top: 40px;
+      left: 12%;
+      border-radius: 15px;
+      width: 94%;
+      box-shadow: rgba(101, 77, 224, 0.2) 0px 8px 24px;
+
+      & > li {
+        padding: 10px 0;
+      }
+
+      & > li :hover {
+        background-color: rgb(228, 213, 213);
+      }
     }
   }
 }

@@ -33,7 +33,7 @@ import { toast } from "react-toastify";
 import SlideCategories from "pages/component/SlideCategories";
 
 const HomePage = () => {
-  const [medicines, setMedicines] = useState([]);
+  const [medicines, setMedicines] = useState({});
   const [discountedProducts, setDiscountedProducts] = useState([]);
   const [latestProducts, setLatestProducts] = useState([]);
 
@@ -55,20 +55,60 @@ const HomePage = () => {
   useEffect(() => {
     const fetchMedicines = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        let response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        const medicineAll = response.data;
         console.log(response);
 
-        const groupedMedicines = response.data.reduce((acc, medicine) => {
-          if (medicine.category.parent === null) {
-            // Kiểm tra nếu danh mục có parent là null
-            const category = medicine.category.id;
-            if (!acc[category]) {
-              acc[category] = {
-                title: medicine.category.name,
-                products: [],
-              };
-            }
-            acc[category].products.push({
+        response = await axios.get("http://127.0.0.1:8000/api/category/");
+        const categoryAll = response.data;
+
+        // const groupedMedicines = response.data.reduce((acc, medicine) => {
+        //   // Kiểm tra nếu danh mục có parent là null
+        //   const category = medicine.category.id;
+        //   if (!acc[category]) {
+        //     acc[category] = {
+        //       title: medicine.category.name,
+        //       products: [],
+        //     };
+        //   }
+        //   acc[category].products.push({
+        //     img: `http://127.0.0.1:8000/static/${medicine.image}`,
+        //     id: medicine.id_medicine,
+        //     name: medicine.name_medicine,
+        //     price: medicine.price,
+        //     active: medicine.active,
+        //     discount_price: medicine.discount_price,
+        //   });
+        //   // Sắp xếp sản phẩm theo thời gian giảm dần
+        //   acc[category].products.sort(
+        //     (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        //   );
+        //   // Chỉ lấy 8 sản phẩm đầu tiên
+        //   acc[category].products = acc[category].products.slice(0, 8);
+
+        //   return acc;
+        // }, {});
+
+        const groupedMedicines = {};
+
+        medicineAll.forEach((medicine) => {
+          const categoryParent = categoryAll.find(
+            (category) =>
+              (medicine.category.parent !== null &&
+                category.id === medicine.category.parent) ||
+              (medicine.category.parent === null &&
+                category.id === medicine.category.id)
+          );
+          if (categoryParent)
+            groupedMedicines[categoryParent.id] = {
+              title: categoryParent.name,
+              products: [],
+            };
+        });
+
+        medicineAll.forEach((medicine) => {
+          if (medicine.category.parent !== null) {
+            groupedMedicines[medicine.category.parent].products.push({
               img: `http://127.0.0.1:8000/static/${medicine.image}`,
               id: medicine.id_medicine,
               name: medicine.name_medicine,
@@ -76,17 +116,18 @@ const HomePage = () => {
               active: medicine.active,
               discount_price: medicine.discount_price,
             });
+
             // Sắp xếp sản phẩm theo thời gian giảm dần
-            acc[category].products.sort(
+            groupedMedicines[medicine.category.parent].products.sort(
               (a, b) => new Date(b.created_at) - new Date(a.created_at)
             );
             // Chỉ lấy 8 sản phẩm đầu tiên
-            acc[category].products = acc[category].products.slice(0, 8);
+            groupedMedicines[medicine.category.parent].products =
+              groupedMedicines[medicine.category.parent].products.slice(0, 8);
           }
-          return acc;
-        }, {});
+        });
 
-        setMedicines(groupedMedicines);
+        setMedicines({ ...groupedMedicines });
       } catch (error) {
         console.error("Lỗi khi tải danh sách thuốc:", error);
       }

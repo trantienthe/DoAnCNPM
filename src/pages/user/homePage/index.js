@@ -62,33 +62,6 @@ const HomePage = () => {
         response = await axios.get("http://127.0.0.1:8000/api/category/");
         const categoryAll = response.data;
 
-        // const groupedMedicines = response.data.reduce((acc, medicine) => {
-        //   // Kiểm tra nếu danh mục có parent là null
-        //   const category = medicine.category.id;
-        //   if (!acc[category]) {
-        //     acc[category] = {
-        //       title: medicine.category.name,
-        //       products: [],
-        //     };
-        //   }
-        //   acc[category].products.push({
-        //     img: `http://127.0.0.1:8000/static/${medicine.image}`,
-        //     id: medicine.id_medicine,
-        //     name: medicine.name_medicine,
-        //     price: medicine.price,
-        //     active: medicine.active,
-        //     discount_price: medicine.discount_price,
-        //   });
-        //   // Sắp xếp sản phẩm theo thời gian giảm dần
-        //   acc[category].products.sort(
-        //     (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        //   );
-        //   // Chỉ lấy 8 sản phẩm đầu tiên
-        //   acc[category].products = acc[category].products.slice(0, 8);
-
-        //   return acc;
-        // }, {});
-
         const groupedMedicines = {};
 
         medicineAll.forEach((medicine) => {
@@ -144,7 +117,7 @@ const HomePage = () => {
         const filterProducts = response.data.filter(
           (productItem) => productItem.discount_price
         );
-        setDiscountedProducts(filterProducts.slice(0, 4));
+        setDiscountedProducts(filterProducts.slice(0, 8));
       } catch (error) {
         console.error("Lỗi khi tải sản phẩm giảm giá:", error);
       }

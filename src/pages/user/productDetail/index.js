@@ -65,6 +65,7 @@ const ProductDetail = () => {
             productItem.category.id === product?.category.id &&
             productItem.id_medicine !== product?.id_medicine
         );
+        console.log("abc::::::", filterProducts);
         setLatestProducts(filterProducts.slice(0, 8));
       } catch (error) {
         console.error("Lỗi khi tải sản phẩm liên quan:", error);
@@ -254,7 +255,7 @@ const ProductDetail = () => {
           <div className="product-detail-container">
             {latestProducts.length > 0 && (
               <SlideCategories
-                title="Sản phẩm liên quan"
+                title={`Sản phẩm liên quan: ${product.category.name}`}
                 responsive={responsive}
                 latestProducts={latestProducts}
               />

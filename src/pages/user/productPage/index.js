@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { formater } from "utils/fomater";
 import { toast } from "react-toastify";
 import anhbacsi from "assets/user/image/hero/bacsi.png";
+import { FcCancel } from "react-icons/fc";
 
 const ProductPage = () => {
   const [medicines, setMedicines] = useState([]);
@@ -43,6 +44,10 @@ const ProductPage = () => {
     } catch (error) {
       console.error("Lỗi khi thêm vào giỏ hàng:", error);
     }
+  };
+
+  const handleNotToCart = () => {
+    toast.error("Sản phẩm đã hết!");
   };
 
   useEffect(() => {
@@ -161,9 +166,15 @@ const ProductPage = () => {
                         </Link>
                       </li>
                       <li>
-                        <AiOutlineShoppingCart
-                          onClick={() => handleAddToCart(item.id)}
-                        />
+                        {item.active ? (
+                          <Link onClick={() => handleAddToCart(item.id)}>
+                            <AiOutlineShoppingCart />
+                          </Link>
+                        ) : (
+                          <Link onClick={() => handleNotToCart()}>
+                            <FcCancel />
+                          </Link>
+                        )}
                       </li>
                     </ul>
                   </div>

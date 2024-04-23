@@ -179,10 +179,10 @@ const Cart = () => {
                       +
                     </button>
                     <p className="item-total">
-                      {item.medicine.discount_price
+                      {(item.medicine.discount_price
                         ? item.medicine.discount_price
-                        : item.medicine.medicine_price}{" "}
-                      VND
+                        : item.medicine.medicine_price) * item.quantity}{" "}
+                      VNĐ
                     </p>
                     {/* <button
                       className="update-btn"

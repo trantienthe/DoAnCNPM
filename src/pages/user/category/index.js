@@ -167,7 +167,7 @@ const CategoryLayout = () => {
               <div className="hero_search_phone">
                 <form>
                   <div className="hero_search_phone_icon">
-                    <AiOutlinePhone />
+                    <AiOutlinePhone style={{ color: "white" }} />
                   </div>
                   <div className="hero_search_phone_text">
                     <p>0123456789</p>

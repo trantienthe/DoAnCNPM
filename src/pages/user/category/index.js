@@ -12,41 +12,76 @@ import {
 } from "react-icons/io";
 import { MdDoubleArrow } from "react-icons/md";
 import { PiArrowBendDownRightDuotone } from "react-icons/pi";
+import axios from "axios";
 
 const CategoryLayout = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState({});
   const [hoveredCategoryId, setHoveredCategoryId] = useState(null);
   const navigate = useNavigate();
   const [isShowCategories, setShowCategories] = useState(true);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/thuoc/")
-      .then((response) => response.json())
-      .then((data) => {
-        const categoriesWithChildren = {};
+    const fetchData = async () => {
+      try {
+        let response = await axios.get("http://127.0.0.1:8000/thuoc/");
+        const products = response.data;
+        response = await axios.get("http://127.0.0.1:8000/api/category/");
+        const categoryAll = response.data;
 
-        data.forEach((item) => {
-          if (item.category.parent === null) {
-            categoriesWithChildren[item.category.id] = {
-              name: item.category.name,
+        const newCategories = {};
+        // tạo category cha
+        products.forEach((product) => {
+          if (
+            product.category.parent === null &&
+            !newCategories[product.category.id]
+          ) {
+            newCategories[product.category.id] = {
+              name: product.category.name,
               children: [],
             };
-          } else {
-            categoriesWithChildren[item.category.parent].children.push({
-              id: item.category.id,
-              name: item.category.name,
-            });
+          }
+
+          if (
+            product.category.parent !== null &&
+            !newCategories[product.category.parent]
+          ) {
+            const categoryParent = categoryAll.find(
+              (category) => category.id === product.category.parent
+            );
+            if (categoryParent)
+              newCategories[categoryParent.id] = {
+                name: categoryParent.name,
+                children: [],
+              };
           }
         });
 
-        console.log("categoriesWithChildren: ", categoriesWithChildren);
+        // tạo category con
+        products.forEach((product) => {
+          if (product.category.parent !== null) {
+            const childCategoryIndex = newCategories[
+              product.category.parent
+            ].children.findIndex(
+              (childCategory) => childCategory.id === product.category.id
+            );
 
-        setCategories(categoriesWithChildren);
-      })
-      .catch((error) => {
+            if (childCategoryIndex === -1)
+              newCategories[product.category.parent].children.push({
+                id: product.category.id,
+                name: product.category.name,
+              });
+          }
+        });
+
+        console.log("cate::::::", newCategories);
+        setCategories({ ...newCategories });
+      } catch (error) {
         console.error("Lỗi khi tải danh sách danh mục:", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleSearchInputChange = (event) => {
@@ -59,7 +94,10 @@ const CategoryLayout = () => {
   };
 
   const handleMouseEnter = (categoryId) => {
-    if (categories[categoryId].children.length > 0) {
+    if (
+      categories[categoryId].children.length > 0 &&
+      hoveredCategoryId !== categoryId
+    ) {
       setHoveredCategoryId(categoryId);
     }
   };
@@ -129,7 +167,7 @@ const CategoryLayout = () => {
               <div className="hero_search_phone">
                 <form>
                   <div className="hero_search_phone_icon">
-                    <AiOutlinePhone />
+                    <AiOutlinePhone style={{ color: "white" }} />
                   </div>
                   <div className="hero_search_phone_text">
                     <p>0123456789</p>

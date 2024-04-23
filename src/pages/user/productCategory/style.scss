@@ -1,0 +1,46 @@
+@use "sass:map";
+@import "style/pages/all";
+
+.featured_flex {
+  display: flex;
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-bottom: 60px;
+  gap: 50px;
+  justify-content: center;
+  padding-bottom: 20px;
+
+  a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .featured_custom {
+    .featured_category {
+      display: flex;
+      gap: 50px;
+
+      .featured_categories {
+        background-color: pink;
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+
+        img {
+          height: 60px;
+          width: 60px;
+          border-radius: 50%;
+          &:hover {
+            border: 2px solid rgb(126, 86, 86);
+          }
+        }
+
+        div {
+          text-align: center;
+        }
+      }
+    }
+  }
+}

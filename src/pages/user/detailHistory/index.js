@@ -5,6 +5,22 @@ const DetailHistory = () => {
   const { id } = useParams();
   const [historyItems, setHistoryItems] = useState([]);
 
+  // Định nghĩa một hàm để chuyển đổi status_id sang chuỗi tương ứng
+  const getStatusText = (statusId) => {
+    switch (statusId) {
+      case "Pending":
+        return "Đang chờ xử lý";
+      case "Processing":
+        return "Đã nhận đơn";
+      case "Shipped":
+        return "Đang giao hàng";
+      case "Delivered":
+        return "Đã giao hàng";
+      default:
+        return "Không xác định";
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -13,6 +29,7 @@ const DetailHistory = () => {
         );
         const data = await response.json();
         setHistoryItems(data);
+        console.log("alo", data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -34,7 +51,7 @@ const DetailHistory = () => {
                     Chi tiết: {item.id}
                   </div>
                   <div className="container_details_top_right">
-                    {item.status_id}
+                    {getStatusText(item.status_id)}
                   </div>
                 </div>
 
@@ -57,7 +74,11 @@ const DetailHistory = () => {
 
                     <div className="container_details_top_bottom_display_price">
                       <div>
-                        <div>{item.price} VND</div>
+                        <div>
+                          {item.discount_price !== null
+                            ? item.discount_price * item.quantity + " VND"
+                            : item.price * item.quantity + " VND"}
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -3,7 +3,7 @@
 
 .containerHeader {
   //background-image: url("../../../../assets/user/image/background/bgheader.jpg");
-  background: #24aef3;
+  background: rgb(45, 45, 210);
   margin-bottom: 20px;
 }
 
@@ -283,7 +283,9 @@
     .hero_search_phone_icon {
       font-size: 25px;
       padding: 10px;
-      background: #a7d0ef;
+      // background: #a7d0ef;
+      background: rgb(76, 76, 196);
+
       line-height: 50px;
       text-align: center;
       border-radius: 50%;

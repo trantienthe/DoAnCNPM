@@ -91,15 +91,19 @@ const Cart = () => {
     }
   };
 
-  // Hàm tăng số lượng sản phẩm
   const increaseQuantity = (itemId) => {
-    const currentQuantity =
-      newQuantities[itemId] ||
-      cartItems.find((item) => item.id_cart === itemId)?.quantity ||
-      1;
-    const updatedQuantity = currentQuantity + 1;
-    setNewQuantities({ ...newQuantities, [itemId]: updatedQuantity });
-    updateCartItemQuantity(itemId, updatedQuantity);
+    const currentItem = cartItems.find((item) => item.id_cart === itemId);
+    const currentQuantity = currentItem?.quantity || 0;
+    const stockQuantity = currentItem?.medicine.stock_quantity || 0;
+
+    // Kiểm tra nếu số lượng mới vượt quá tồn kho
+    if (currentQuantity < stockQuantity) {
+      const updatedQuantity = currentQuantity + 1;
+      setNewQuantities({ ...newQuantities, [itemId]: updatedQuantity });
+      updateCartItemQuantity(itemId, updatedQuantity);
+    } else {
+      toast.error("Số lượng sản phẩm vượt quá tồn kho");
+    }
   };
 
   // Hàm giảm số lượng sản phẩm
@@ -175,10 +179,10 @@ const Cart = () => {
                       +
                     </button>
                     <p className="item-total">
-                      {item.medicine.discount_price
+                      {(item.medicine.discount_price
                         ? item.medicine.discount_price
-                        : item.medicine.medicine_price}{" "}
-                      VND
+                        : item.medicine.medicine_price) * item.quantity}{" "}
+                      VNĐ
                     </p>
                     {/* <button
                       className="update-btn"
